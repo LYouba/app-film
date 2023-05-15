@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, debounceTime, distinctUntilChanged, ignoreElements, map, of, switchMap, tap } from 'rxjs';
-import { film } from 'src/app/models/film.model';
-import { FilmService } from 'src/app/services/film.service';
-import { SearchService } from 'src/app/services/search.service';
+import { film } from 'src/app/film-serie/models/film.model';
+import { FilmService } from 'src/app/film-serie/services/film.service';
+import { SearchService } from 'src/app/film-serie/services/search.service';
 
 @Component({
   selector: 'app-list-film',

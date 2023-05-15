@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { serie } from 'src/app/models/serie.model';
+import { serie } from 'src/app/film-serie/models/serie.model';
 
 @Component({
   selector: 'app-serie',

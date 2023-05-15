@@ -1,6 +1,6 @@
 import { Component, Renderer2, ViewChild } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
-import { SearchService } from '../services/search.service';
+import { SearchService } from '../film-serie/services/search.service';
 
 @Component({
   selector: 'app-header',

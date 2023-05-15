@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
-import { FilmService } from 'src/app/services/film.service';
+import { FilmService } from 'src/app/film-serie/services/film.service';
 
 @Component({
   selector: 'app-details-film',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, catchError, of } from 'rxjs';
-import { SerieService } from 'src/app/services/serie.service';
+import { SerieService } from 'src/app/film-serie/services/serie.service';
 
 @Component({
   selector: 'app-details-serie',
