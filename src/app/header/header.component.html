@@ -1,0 +1,44 @@
+<header class="flex items-center bg-slate-300 sticky w-full top-0 rounded-2xl z-20">
+  <a routerLink="/">
+    <div class="flex items-center w-max box-">
+      <img src="../../assets/logo1.png" width="90" alt="logo" title="logo" />
+      <p class="font-bold text-2xl text-pink-900">FilmsSéries</p>
+    </div>
+  </a>
+   <!-- [routerLinkActiveOptions]="{ exact: true }" -->
+  <nav class="w-screen flex justify-between ml-8 text-center">
+    <ul class="flex">
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
+        <a routerLink="films/nouveaux-film"><span class="block p-1">Nouveautés</span></a>
+      </li>
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
+        <a routerLink="films/all-movie"><span class="block p-1">Films</span></a>
+      </li>
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
+        <a routerLink="series"><span class="block p-1">Séries</span></a>
+      </li>
+      <!-- <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
+        <a routerLink="/genres"><span class="block p-1">Genres</span></a>
+      </li> -->
+    </ul>
+    <ul class="flex">
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
+        <a routerLink="/inscription"><span class="block p-1">Inscription</span></a>
+      </li>
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
+        <a routerLink="/connexion"><span class="block p-1">Connexion</span></a>
+      </li>
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 p-1 max-w-fit m-4 bg-blue-500 opacity-80">
+        <div class="search-container">
+          <input #serach class="rounded-2xl search" type="text" name="search" id="search" placeholder="Search ..." (keyup)="onSearch(serach.value)"/>
+          <mat-icon class="icon-search">search</mat-icon>
+        </div>
+      </li>
+    </ul>
+    <!-- <button class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80" [matMenuTriggerFor]="menu" (click)="changeColor()">After</button>
+    <mat-menu #menu="matMenu" xPosition="after" overlayPanelClass="custom-menu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu> -->
+  </nav>
+</header>

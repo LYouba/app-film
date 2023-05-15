@@ -1,0 +1,18 @@
+<div *ngIf="(genre$ | async) as dataGenre" class="flex justify-center flex-wrap text-white sticky top-24 z-10">
+  <ng-container *ngIf="dataGenre.genres && dataGenre !== 0; else errors">
+    <!-- <p>{{dataGenre.genres|json}}</p> -->
+    <ng-container *ngFor="let genre of dataGenre.genres">
+      <button class="p-1 bg-teal-600 rounded-2xl m-1" (click)="onClick(genre[1])">{{genre[1]}}</button>
+    </ng-container>
+  </ng-container>
+  <ng-template #errors>
+    <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
+      <ng-container *ngIf="dataGenre.status === 404 || dataGenre.status === 0; else errors">
+        {{ dataGenre.statusText }}. code :{{ dataGenre.status }}
+      </ng-container>
+      <ng-template #errors>
+        {{ dataGenre.error.errors[0].text }}. code :{{ dataGenre.error.errors[0].code }}
+      </ng-template>
+    </div>
+  </ng-template>
+</div>

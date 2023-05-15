@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  /* height: 100%; */ /* utile si la page ne prend pas toutes la page */
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("https://img.betaseries.com/c2lhILk3DOwsw3j1vOGDT4t_zsQ=/920x540/smart/filters:blur(30)/https%3A%2F%2Fpictures.betaseries.com%2Ffilms%2Fbackdrops%2Foriginal%2F540.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+.custom-menu {
+  background-color: red; /* Remplacez par la couleur de fond souhaitée */
+  min-width: fit-content !important;
+  border-radius: 20px !important;
+}
