@@ -9,13 +9,13 @@
   <nav class="w-screen flex justify-between ml-8 text-center">
     <ul class="flex">
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
-        <a routerLink="films/nouveaux-film"><span class="block p-1">Nouveautés</span></a>
+        <a #linkNouveauter routerLink="films/nouveaux-film"><span class="block p-1" (click)="onClick(serach, linkNouveauter)">Nouveautés</span></a>
       </li>
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
-        <a routerLink="films/all-movie"><span class="block p-1">Films</span></a>
+        <a #linkFilm routerLink="films/all-movie"><span class="block p-1" (click)="onClick(serach, linkFilm)">Films</span></a>
       </li>
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
-        <a routerLink="series"><span class="block p-1">Séries</span></a>
+        <a #linkSerie routerLink="series"><span class="block p-1" (click)="onClick(serach, linkSerie)">Séries</span></a>
       </li>
       <!-- <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
         <a routerLink="/genres"><span class="block p-1">Genres</span></a>
@@ -29,8 +29,9 @@
         <a routerLink="/connexion"><span class="block p-1">Connexion</span></a>
       </li>
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 p-1 max-w-fit m-4 bg-blue-500 opacity-80">
-        <div class="search-container">
-          <input #serach class="rounded-2xl search" type="text" name="search" id="search" placeholder="Search ..." (keyup)="onSearch(serach.value)"/>
+        <div class="search-container" title="la recherhce fonctionne seulment sur les films et séries">
+          <input #serach class="rounded-2xl search" type="text" name="search" id="search" placeholder="Search ..."
+          (keyup)="onSearch(serach.value)" disabled/>
           <mat-icon class="icon-search">search</mat-icon>
         </div>
       </li>

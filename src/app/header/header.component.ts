@@ -19,6 +19,21 @@ export class HeaderComponent {
     this.searchService.setSearch(imputSearch);
   }
 
+  /**
+   * Determines whether click on pour activer ou désactivé le champ de recherhce
+   * @param elSearch
+   * @param elSible
+   */
+  onClick(elSearch: HTMLElement, elSible: HTMLElement) {
+
+    if (elSible.getAttribute('href') === "/films/nouveaux-film") {
+      elSearch.setAttribute("disabled", "null")
+    } else {
+      elSearch.removeAttribute("disabled")
+    }
+    console.log(elSible.getAttribute('href'));
+  }
+
   /* pour le menu avec angular material  */
   // @ViewChild('menu', { static: true }) menu!: MatMenu;
   // changeColor() {
