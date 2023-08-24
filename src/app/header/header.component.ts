@@ -14,13 +14,13 @@ export class HeaderComponent {
   constructor(
     private _renderer2: Renderer2,
     private searchService: SearchService,
-    public dialog: MatDialog
+    public dialogLogin: MatDialog
   ) { }
 
   ngOnInit(){}
 
   login() {
-    this.dialog.open(DialogLoginComponent);
+    this.dialogLogin.open(DialogLoginComponent);
   }
 
   /**

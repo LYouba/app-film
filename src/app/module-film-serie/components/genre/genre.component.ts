@@ -25,7 +25,10 @@ export class GenreComponent {
 
   getGenresFilms() {
     this.genre$ = this.serviceFilm.getGenresFilms().pipe(
-      map(data => { return { genres: Object.entries(data.genres) } }), // transformer en un tableau pour simplifier la lecture dans la templetre (avant c'était un onjet et il y a eu des soucis de conversion)
+      // transformer en un tableau pour simplifier la lecture dans la templetre 
+      //(avant c'était un onjet et il y a eu des soucis de conversion)
+      map(data => { return { genres: Object.entries(data.genres) } }), 
+      
       catchError(error => of(error)),
     );
     // this.genre$.subscribe(x => console.log(x.genres))

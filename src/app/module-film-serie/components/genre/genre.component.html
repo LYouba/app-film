@@ -1,4 +1,4 @@
-<div *ngIf="(genre$ | async) as dataGenre" class="flex justify-center flex-wrap text-white sticky top-24 z-10">
+<div *ngIf="(genre$ | async) as dataGenre" class="max-sm:h-20 max-sm:overflow-auto flex justify-center flex-wrap text-white sticky top-24 z-10">
   <ng-container *ngIf="dataGenre.genres && dataGenre !== 0; else errors">
     <!-- <p>{{dataGenre.genres|json}}</p> -->
     <ng-container *ngFor="let genre of dataGenre.genres">

@@ -20,3 +20,10 @@ mat-icon {
 a{
   cursor: pointer;
 }
+
+
+.custom-menu {
+  background-color: red; /* Remplacez par la couleur de fond souhaitée */
+  min-width: fit-content !important;
+  border-radius: 20px !important;
+}

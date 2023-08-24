@@ -33,3 +33,17 @@ $app-film-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($app-film-theme);
 
+@import '@angular/material/_theming';
+@include mat-core();
+
+// Importer la palette de couleur de l'afpa
+@import './app-palette.scss';
+
+
+$candy-app-primary: mat-palette($afpa-palette, 50);
+$candy-app-accent:  mat-palette($afpa-palette, 100);
+$candy-app-warn:  mat-palette($afpa-palette, 200);
+$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Inclure comme theme par default
+@include angular-material-theme($candy-app-theme);
