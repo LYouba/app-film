@@ -1,6 +1,8 @@
 import { Component, Renderer2, ViewChild } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
-import { SearchService } from '../film-serie/services/search.service';
+import { SearchService } from '../module-film-serie/services/search.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogLoginComponent } from '../login/dialog-login/dialog-login.component';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,17 @@ import { SearchService } from '../film-serie/services/search.service';
 })
 export class HeaderComponent {
 
-  constructor(private _renderer2: Renderer2, private searchService: SearchService) { }
+  constructor(
+    private _renderer2: Renderer2,
+    private searchService: SearchService,
+    public dialog: MatDialog
+  ) { }
+
+  ngOnInit(){}
+
+  login() {
+    this.dialog.open(DialogLoginComponent);
+  }
 
   /**
    * Searchs header component
@@ -24,14 +36,15 @@ export class HeaderComponent {
    * @param elSearch
    * @param elSible
    */
-  onClick(elSearch: HTMLElement, elSible: HTMLElement) {
+  desableOrenableSearch(elSearch: HTMLElement, elSible: HTMLElement) {
 
     if (elSible.getAttribute('href') === "/films/nouveaux-film") {
-      elSearch.setAttribute("disabled", "null")
+
+      if (elSearch.parentElement?.parentElement) elSearch.parentElement?.parentElement.setAttribute("hidden", "null")
     } else {
-      elSearch.removeAttribute("disabled")
+      if (elSearch.parentElement?.parentElement) elSearch.parentElement?.parentElement.removeAttribute("hidden");
     }
-    console.log(elSible.getAttribute('href'));
+    // console.log(elSible.getAttribute('href'));
   }
 
   /* pour le menu avec angular material  */

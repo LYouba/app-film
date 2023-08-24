@@ -14,5 +14,9 @@ mat-icon {
 }
 
 .search {
-  padding-left: 30px; /* Assurez-vous d'ajuster cette valeur en fonction de la taille de l'icône */
+  padding-left: 30px; /* A d'ajuster en fonction de la taille de l'icône */
+}
+
+a{
+  cursor: pointer;
 }

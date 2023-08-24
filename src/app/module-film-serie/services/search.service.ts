@@ -7,8 +7,7 @@ import { Subject } from 'rxjs';
 export class SearchService {
   private searchTerms = new Subject<string>(); // permet de construire un flux de connées
 
-  /**créer un obseravable à la base du premier mais qui ne
-    peut pas utiliser la methode next() ou complete(), il
+  /**créer un obseravable à la base du sujet, il
     est juste possible de lire les données */
   searchTermReadOnly$ = this.searchTerms.asObservable();
 

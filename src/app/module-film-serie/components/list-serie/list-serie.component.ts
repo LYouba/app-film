@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map, catchError, of, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { serie } from 'src/app/film-serie/models/serie.model';
-import { SearchService } from 'src/app/film-serie/services/search.service';
-import { SerieService } from 'src/app/film-serie/services/serie.service';
+import { serie } from 'src/app/module-film-serie/models/serie.model';
+import { SearchService } from 'src/app/module-film-serie/services/search.service';
+import { SerieService } from 'src/app/module-film-serie/services/serie.service';
 
 @Component({
   selector: 'app-list-serie',

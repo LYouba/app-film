@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, of, map, catchError } from 'rxjs';
-import { FilmService } from 'src/app/film-serie/services/film.service';
-import { SerieService } from 'src/app/film-serie/services/serie.service';
+import { FilmService } from 'src/app/module-film-serie/services/film.service';
+import { SerieService } from 'src/app/module-film-serie/services/serie.service';
 
 @Component({
   selector: 'app-genre',

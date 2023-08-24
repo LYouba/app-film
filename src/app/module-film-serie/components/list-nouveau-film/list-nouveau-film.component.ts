@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { film } from 'src/app/film-serie/models/film.model';
-import { FilmService } from 'src/app/film-serie/services/film.service';
+import { film } from 'src/app/module-film-serie/models/film.model';
+import { FilmService } from 'src/app/module-film-serie/services/film.service';
 
 @Component({
   selector: 'app-list-nouveau-film',
@@ -13,11 +13,16 @@ export class ListNouveauFilmComponent {
 
   films$!: Observable<any>;
 
-  constructor(private serviceFilm: FilmService,private router: Router) { }
+  constructor(
+    private serviceFilm: FilmService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+
     this.getNewFilms();
-    this.router.events.subscribe( _=> {
+
+    this.router.events.subscribe(_ => {
       this.getNewFilms();
     });
   }
@@ -25,7 +30,7 @@ export class ListNouveauFilmComponent {
   getNewFilms() {
     this.films$ = this.films$ = this.serviceFilm.getMoviesUpComing().pipe(
       map(data => {
-        console.log(data);
+        // console.log(data);
         return { films: data.movies }
       }),
       catchError(error => of(error))
