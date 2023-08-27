@@ -2,13 +2,13 @@
   <ng-container *ngIf="data.detailsSerie as serie ; else errors"><!-- -->
     <div  class="text-amber-50 mt-24">
       <h1 *ngIf="serie.title" class="mx-auto text-center text-4xl p-6">{{ serie.title!=='' ? serie.title : 'Aucun titre à afficher' }}</h1>
-      <div class="flex justify-center">
-        <div class="text-right self-center">
+      <div class="flex justify-center max-sm:flex-wrap">
+        <div class="max-sm:h-60 max-sm:overflow-auto text-right self-center">
         <p *ngIf="serie.director" class="pr-4 pb-4 font-bold">Realisateur<br><span class="font-thin pt-2 block">{{serie.director}}</span></p>
         <p *ngIf="serie.release_date && serie.release_date !== '0000-00-00'" class="p-3 font-bold">Date de réalisation<span class="font-thin pt-2 block">{{serie.release_date}}</span></p>
-        <p *ngIf="serie.genres.length!==0 && serie.genres" class="p-3 font-bold">Genres
-          <span  class="font-thin pt-2 block">
-            <span *ngFor="let genre of serie.genres | keyvalue; last as isLast">{{genre.value}}{{isLast ?'':', '}}</span>
+        <p *ngIf="serie.genres.length!==0 && serie.genres" class="max-sm:inline-block p-3 font-bold">Genres
+          <span  class="max-sm:w-min font-thin pt-2 block">
+            <span *ngFor="let genre of serie.genres | keyvalue; last as isLast">{{genre.value}}{{isLast ? '.' : ', ' }}</span>
           </span>
         </p>
         <p *ngIf="serie.length && serie.length!==0" class="p-3 font-bold">Durée<span class="font-thin pt-2 block">{{serie.length | time}}</span></p>
@@ -16,15 +16,15 @@
         <p *ngIf="serie.language" class="p-3 font-bold">Langague<span class="font-thin pt-2 block">{{serie.language}}</span></p>
       </div>
       <div >
-        <img *ngIf="serie.images.poster else elseBlockImg" class="w-80" src="{{serie.images.poster}}" alt="Photo de couverture serie">
+        <img *ngIf="serie.images.poster else elseBlockImg" class="max-sm:w-40 w-80" src="{{serie.images.poster}}" alt="Photo de couverture serie">
         <ng-template #elseBlockImg>
-          <img class="w-80" style="height: 480px;" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture serie">
+          <img class="max-sm:w-20 w-80 img-heaight" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture serie">
         </ng-template>
       </div>
-      <div class="ml-40">'video'</div>
+      <div class="sm:ml-40">'""  Pas de video  ""'</div>
       </div>
-      <p *ngIf="serie.description" class="mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{serie.description}}</span></p>
-      <p *ngIf="serie.tagline" class="pt-4 text-center"><span class="font-thin">{{serie.tagline}}</span></p>
+      <p *ngIf="serie.description" class="max-sm:h-60 max-sm:overflow-auto max-sm:w-3/4 max-sm:mt-5 mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{serie.description}}</span></p>
+      <p *ngIf="serie.tagline" class="max-sm:h-fit max-sm:overflow-auto max-sm:w-3/4 max-sm:mt-5 pt-4 text-center"><span class="font-thin">{{serie.tagline}}</span></p>
     </div>
   </ng-container>
   <ng-template #errors>

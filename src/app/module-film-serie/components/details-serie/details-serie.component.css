@@ -1,0 +1,9 @@
+.img-heaight {
+    height: 480px;
+  }
+  @media not (min-width: 640px) {
+    .img-heaight {
+      height: 120px;
+    }
+  }
+  

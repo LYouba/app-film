@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MaterialAngularModule } from './material-modules/material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FilmSerieModule } from './module-film-serie/film-serie.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogLoginComponent } from './login/dialog-login/dialog-login.component';
 import { LoginComponent } from './login/login.component';
 
@@ -23,7 +23,8 @@ import { LoginComponent } from './login/login.component';
     LoginComponent,
   ],
   imports: [
-    FormsModule,
+    FormsModule, // [(ngModule)]
+    ReactiveFormsModule, // [formGroup]
     FilmSerieModule,
     BrowserModule,
     AppRoutingModule,

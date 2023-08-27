@@ -1,5 +1,5 @@
 <header class="flex items-center bg-slate-300 sticky w-full top-0 rounded-2xl z-20">
-  <a routerLink="/">
+  <a routerLink="/" (click)="desableOrenableSearch(search, linkNouveautees)">
     <div class="flex items-center w-max box-">
       <img class=":max-smw-12" src="../../assets/logo1.png" width="90" alt="logo" title="logo" />
       <p class="max-sm:hidden font-bold text-2xl text-pink-900">FilmsSéries</p>
@@ -9,11 +9,11 @@
   <nav class="max-sm:justify-end max-sm:items-center w-screen flex justify-around text-center">
     <ul class="max-sm:hidden flex ">
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
-        <a #linkNouveautees routerLink="films/nouveaux-film"><span class="block p-1"
+        <a #linkNouveautees routerLink="nouveautées"><span class="block p-1"
             (click)="desableOrenableSearch(search, linkNouveautees)">Nouveautés</span></a>
       </li>
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
-        <a #linkFilm routerLink="films/all-movie"><span class="block p-1"
+        <a #linkFilm routerLink="films"><span class="block p-1"
             (click)="desableOrenableSearch(search, linkFilm)">Films</span></a>
       </li>
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
@@ -34,28 +34,27 @@
           <a [routerLink]="['/login', true]"><span class="block p-1" (click)="login()">Connexion</span></a>
         </li>
       </div>
-      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 p-1 max-w-fit m-4 bg-blue-500 opacity-80"
-        hidden>
+      <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 p-1 max-w-fit m-4 bg-blue-500 opacity-80">
         <div class="search-container" title="la recherhce fonctionne seulment sur les films et séries">
           <input #search class="max-sm:w-1/2 rounded-2xl search" type="text" name="search" id="search" placeholder="Search ..."
-            (keyup)="onSearch(search.value)" />
+            (keyup)="onSearch(search.value)" disabled/>
           <mat-icon class="icon-search">search</mat-icon>
         </div>
       </li>
     </ul>
-    <ul class="sm:hidden mr-6 ">
-      <button mat-mini-fab aria-label="icon button menu" color="primary"
+    <ul class="sm:hidden mr-6" (click)="handlerStyleMatMenu()">
+      <button mat-mini-fab aria-label="icon button menu" color="primary" (click)="handlerStyleMatMenu()"
         class="hover:bg-blue-600 bg-blue-500 opacity-80" [matMenuTriggerFor]="menu">
-        <mat-icon>menu</mat-icon>
+        <mat-icon (click)="handlerStyleMatMenu()">menu</mat-icon>
       </button>
-      <mat-menu #menu="matMenu" xPosition="after" hasBackdrop="false" panelClass="custom-menu">
+      <mat-menu #menu="matMenu" xPosition="after" hasBackdrop="false">
         <button mat-menu-item>
           <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
-            <a #linkNouveautees routerLink="films/nouveaux-film"><span class="block p-1"
+            <a #linkNouveautees routerLink="nouveautées"><span class="block p-1"
                 (click)="desableOrenableSearch(search, linkNouveautees)">Nouveautés</span></a>
           </li>
           <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
-            <a #linkFilm routerLink="films/all-movie"><span class="block p-1"
+            <a #linkFilm routerLink="films"><span class="block p-1"
                 (click)="desableOrenableSearch(search, linkFilm)">Films</span></a>
           </li>
           <li routerLinkActive="active"
@@ -63,9 +62,6 @@
             <a #linkSerie routerLink="series"><span class="block p-1"
                 (click)="desableOrenableSearch(search, linkSerie)">Séries</span></a>
           </li>
-        </button>
-        <button mat-menu-item></button>
-        <button mat-menu-item>
           <li routerLinkActive="active"
             class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
             <a routerLink="/inscription"><span class="block p-1">Inscription</span></a>

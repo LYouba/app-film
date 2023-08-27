@@ -19,9 +19,10 @@ export class DetailsFilmComponent {
   // console.log(this.route.snapshot.params); // methode statique s'il y a un changement de route sans recharger le paramètre ne va pas fonctionner
   getDetailsFilm() {
     this.route.params.subscribe({
-      next: (value) => {
-        this.film$ = this.filmService.getDetailsFilmByID(value['id']).pipe(
-          map(data => { console.log(data.movie);
+      next: (params) => {
+        this.film$ = this.filmService.getDetailsFilmByID(params['id']).pipe(
+          map(data => { 
+            // console.log(data.movie);
             return { detailsFilm: data.movie } }),
           catchError(error => of(error))
         );
@@ -31,6 +32,6 @@ export class DetailsFilmComponent {
         // throw new Error(`erreur parametre id details film `);
       },
     })
-    this.film$.subscribe(x=> console.log(x))
+    // this.film$.subscribe(x=> console.log(x))
   }
 }

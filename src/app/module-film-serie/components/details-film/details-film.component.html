@@ -4,25 +4,29 @@ on faisant une autre requete sur un autre lien -->
   <ng-container *ngIf="data.detailsFilm as film; else errors">
     <div  class="text-amber-50 mt-24">
       <h1 *ngIf="film.title" class="mx-auto text-center text-4xl p-6">{{ film.title!=='' ? film.title : 'Aucun titre à afficher' }}</h1>
-      <div class="flex justify-center">
-        <div class="text-right self-center">
-        <p *ngIf="film.director" class="pr-4 pb-4 font-bold">Realisateur<br><span class="font-thin pt-2 block">{{film.director}}</span></p>
-        <p *ngIf="film.release_date && film.release_date !== '0000-00-00'" class="p-3 font-bold">Date de réalisation<span class="font-thin pt-2 block">{{film.release_date}}</span></p>
-        <p *ngIf="film.genres.length!==0 && film.genres" class="p-3 font-bold">Genres<span class="font-thin pt-2 block">{{film.genres}}</span></p>
-        <p *ngIf="film.length && film.length!==0" class="p-3 font-bold">Durée<span class="font-thin pt-2 block">{{film.length | time}}</span></p>
-        <p *ngIf="film.followers" class="p-3 font-bold">followers<span class="font-thin pt-2 block">{{film.followers}} {{ film.followers === 1 ? 'membre' : 'membres' }}</span></p>
-        <p *ngIf="film.language" class="p-3 font-bold">Langague<span class="font-thin pt-2 block">{{film.language}}</span></p>
+      <div class="flex justify-center max-sm:flex-wrap">
+        <div class="max-sm:h-60 max-sm:overflow-auto text-right self-center">
+          <p *ngIf="film.director" class="pr-4 pb-4 font-bold">Realisateur<br><span class="font-thin pt-2 block">{{film.director}}</span></p>
+          <p *ngIf="film.release_date && film.release_date !== '0000-00-00'" class="p-3 font-bold">Date de réalisation<span class="font-thin pt-2 block">{{film.release_date}}</span></p>
+          <p *ngIf="film.genres.length!==0 && film.genres" class="max-sm:inline-block p-3 font-bold">Genres
+            <span class="max-sm:w-min font-thin pt-2 block">
+              <ng-container *ngFor="let genre of film.genres | keyvalue; last as isLast">{{genre.value}}{{isLast ? '.' : ', ' }}</ng-container>
+            </span>
+          </p>
+          <p *ngIf="film.length && film.length!==0" class="p-3 font-bold">Durée<span class="font-thin pt-2 block">{{film.length | time}}</span></p>
+          <p *ngIf="film.followers" class="p-3 font-bold">followers<span class="font-thin pt-2 block">{{film.followers}} {{ film.followers === 1 ? 'membre' : 'membres' }}</span></p>
+          <p *ngIf="film.language" class="p-3 font-bold">Langague<span class="font-thin pt-2 block">{{film.language}}</span></p>
+        </div>
+        <div >
+          <img *ngIf="film.poster else elseBlockImg" class="max-sm:w-40 w-80" src="{{film.poster}}" alt="Photo de couverture film">
+          <ng-template #elseBlockImg>
+            <img class="max-sm:w-20 w-80 img-heaight" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture film">
+          </ng-template>
+        </div>
+        <div class="sm:ml-40">'""  Pas de video  ""' </div>
       </div>
-      <div >
-        <img *ngIf="film.poster else elseBlockImg" class="w-80" src="{{film.poster}}" alt="Photo de couverture film">
-        <ng-template #elseBlockImg>
-          <img class="w-80" style="height: 480px;" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture film">
-        </ng-template>
-      </div>
-      <div class="ml-40">'video'</div>
-      </div>
-      <p *ngIf="film.synopsis" class="mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{film.synopsis}}</span></p>
-      <p *ngIf="film.tagline" class="pt-4 text-center"><span class="font-thin">{{film.tagline}}</span></p>
+      <p *ngIf="film.synopsis" class="max-sm:h-60 max-sm:overflow-auto max-sm:w-3/4 max-sm:mt-5 mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{film.synopsis}}</span></p>
+      <p *ngIf="film.tagline" class="max-sm:h-fit max-sm:overflow-auto max-sm:w-3/4 max-sm:mt-5 pt-4 text-center"><span class="font-thin">{{film.tagline}}</span></p>
     </div>
   </ng-container>
   <ng-template #errors>
