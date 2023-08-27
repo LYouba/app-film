@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
   selector: 'app-page-not-found',
   template: `
     <p>
-      page-not-found !
+      Oooops :p
     </p>
   `,
-  styleUrls: ['./page-not-found.component.css']
+  styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {
 

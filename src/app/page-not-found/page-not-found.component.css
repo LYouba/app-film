@@ -1,9 +1,0 @@
-p{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: red;
-  font-size: x-large;
-  text-align: center;
-}

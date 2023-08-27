@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+@import "../../custom-theme.scss";
+
+
+.active {
+  background-color: mat.get-color-from-palette($accent, 700);
+}
+.search-container {
+  position: relative;
+}
+
+header{
+  background-color: mat.get-color-from-palette($primary, 100);
+}
+mat-icon {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  color: mat.get-color-from-palette($accent, 700);
+}
+
+.search {
+  padding-left: 30px; /* A d'ajuster en fonction de la taille de l'icône */
+}
+
+a{
+  cursor: pointer;
+  background-color: mat.get-color-from-palette($accent, 700);
+  border-radius: 0 16px;
+}

@@ -6,7 +6,7 @@ import { SerieService } from 'src/app/module-film-serie/services/serie.service';
 @Component({
   selector: 'app-genre',
   templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.css']
+  styleUrls: ['./genre.component.scss']
 })
 export class GenreComponent {
   genre$: Observable<any> = of(0);

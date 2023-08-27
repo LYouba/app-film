@@ -1,8 +1,8 @@
-<div *ngIf="(genre$ | async) as dataGenre" class="max-sm:h-20 max-sm:overflow-auto flex justify-center flex-wrap text-white sticky top-24 z-10">
+<div *ngIf="(genre$ | async) as dataGenre" class="custom max-sm:h-20 max-sm:overflow-auto flex justify-center flex-wrap text-white sticky top-24 z-10">
   <ng-container *ngIf="dataGenre.genres && dataGenre !== 0; else errors">
     <!-- <p>{{dataGenre.genres|json}}</p> -->
     <ng-container *ngFor="let genre of dataGenre.genres">
-      <button class="p-1 bg-teal-600 rounded-2xl m-1" (click)="onClick(genre[1])">{{genre[1]}}</button>
+      <button class="p-1 rounded-2xl m-1" (click)="onClick(genre[1])">{{genre[1]}}</button>
     </ng-container>
   </ng-container>
   <ng-template #errors>

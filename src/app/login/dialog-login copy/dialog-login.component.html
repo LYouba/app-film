@@ -1,0 +1,46 @@
+<mat-dialog-content>
+  <h1>{{ dialogLogin ? "Login" : "Mot de passe oublié" }}</h1>
+  <hr />
+  <form [formGroup]="formLogin" (submit)="onSubmit($event)">
+    <mat-form-field>
+      <mat-label>Email :</mat-label>
+      <input matInput type="text" name="email" formControlName="email" />
+      <mat-error class="max-sm:text-xs" #formLoginMatError *ngIf="formLogin.get('email')?.invalid">{{getErrorMessage('email')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="dialogLogin">
+      <mat-label>Mot de passe :</mat-label>
+      <input matInput type="text" name="passWord" formControlName="passWord" placeholder="Mot de passe"/>
+      <mat-error class="max-sm:text-xs" #formLoginMatError *ngIf="formLogin.get('passWord')?.invalid">{{getErrorMessage('passWord')}}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="formLogin.invalid">Valider</button>
+    <a mat-button *ngIf="dialogLogin; else dialogPassForget" class="max-sm:text-center max-sm:text-xs text-blue-500" (click)="changeContentDialog()">Mot de passe oublié ?</a>
+    <ng-template #dialogPassForget >
+      <a mat-button class="max-sm:text-center max-sm:text-xs text-blue-500" (click)="changeContentDialog()">Se connecter !</a></ng-template>
+  </form>
+</mat-dialog-content>
+
+
+
+
+
+
+
+<!-- formControlName utiliser avec le [formGroup] // [formControl] utiliser sans [formGroup]  -->
+
+<!-- <div class="example-container" [formGroup]="myGroup">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your email</mat-label>
+    <input matInput placeholder="pat@example.com" [formControl]="eemail" required>
+    <p>{{eemail|json}}</p>
+    <mat-error *ngIf="eemail.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</div>
+
+<div>
+  <form #form="ngForm" (ngSubmit)="onSubmita(form)" novalidate>
+    <label for="name">Hero name: </label>
+    <input id="name" [(ngModel)]="hero.name" required name="name" #name="ngModel" placeholder="name">
+    <p>{{hero.name}}</p>
+    <button type="submit">sub</button>
+  </form>
+</div> -->

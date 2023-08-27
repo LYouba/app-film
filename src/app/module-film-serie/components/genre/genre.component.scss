@@ -1,0 +1,16 @@
+@use "@angular/material" as mat;
+@import "../../../../custom-theme.scss";
+
+button {
+  background-color: mat.get-color-from-palette($accent, 700);
+}
+
+.custom {
+  background: linear-gradient(
+    to left,
+    mat.get-color-from-palette($primary, 100),
+    mat.get-color-from-palette($primary, 800),
+    mat.get-color-from-palette($primary, 100)
+  );
+  border-radius: 16px;
+}
