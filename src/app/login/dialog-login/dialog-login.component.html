@@ -5,7 +5,7 @@
     <mat-form-field>
       <mat-label>Email :</mat-label>
       <input matInput type="text" name="email" formControlName="email" />
-      <mat-error class="max-md:text-xs" #formLoginMatError *ngIf="formLogin.get('email')?.invalid">{{getErrorMessage('email')}}</mat-error>
+      <mat-error class="max-lg:text-xs" #formLoginMatError *ngIf="formLogin.get('email')?.invalid">{{getErrorMessage('email')}}</mat-error>
     </mat-form-field>
     <mat-form-field *ngIf="dialogLogin">
       <mat-label>Mot de passe :</mat-label>
@@ -13,12 +13,12 @@
       <button mat-icon-button matSuffix type="button" class="button-hide-pass-word" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
-      <mat-error class="max-md:text-xs" #formLoginMatError *ngIf="formLogin.get('passWord')?.invalid">{{getErrorMessage('passWord')}}</mat-error>
+      <mat-error class="max-lg:text-xs" #formLoginMatError *ngIf="formLogin.get('passWord')?.invalid">{{getErrorMessage('passWord')}}</mat-error>
     </mat-form-field>
     <button mat-raised-button type="submit" class="button-validate" color="accent" [disabled]="formLogin.invalid">Valider</button>
-    <a mat-button *ngIf="dialogLogin; else dialogPassForget" class="max-md:text-center max-md:text-xs text-blue-500" (click)="changeContentDialog()">Mot de passe oublié ?</a>
+    <a mat-button *ngIf="dialogLogin; else dialogPassForget" class="max-lg:text-center max-lg:text-xs text-blue-500" (click)="changeContentDialog()">Mot de passe oublié ?</a>
     <ng-template #dialogPassForget >
-      <a mat-button class="max-md:text-center max-md:text-xs text-blue-500" (click)="changeContentDialog()">Se connecter !</a></ng-template>
+      <a mat-button class="max-lg:text-center max-lg:text-xs text-blue-500" (click)="changeContentDialog()">Se connecter !</a></ng-template>
   </form>
 </mat-dialog-content>
 

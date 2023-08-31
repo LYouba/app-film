@@ -1,9 +1,9 @@
 app-film {
-  flex: 0 2 240px;
+  flex: 0 2;
 }
 
 @media not (min-width: 768px){
   app-film {
-    flex: 0 2 96px;
+    flex: 0 2;
   }
 }

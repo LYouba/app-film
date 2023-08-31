@@ -1,13 +1,13 @@
 <header class="flex items-center bg-slate-300 sticky w-full top-0 rounded-b-2xl z-20">
   <a routerLink="/" >
     <div class="flex items-center w-max box-">
-      <img class=":max-mdw-12" src="../../assets/logo1.png" width="90" alt="logo" title="logo" />
-      <p class="max-md:hidden px-6 pr-8 font-bold text-2xl text-pink-900">FilmsSéries</p>
+      <img class="max-lg:w-12" src="../../assets/logo1.png" width="90" alt="logo" title="logo" />
+      <p class="max-lg:hidden px-6 pr-8 font-bold text-2xl text-pink-900">FilmsSéries</p>
     </div>
   </a>
   <!-- [routerLinkActiveOptions]="{ exact: true }" -->
-  <nav class="max-md:justify-center max-md:items-center w-screen flex justify-around text-center">
-    <ul class="max-md:hidden flex ">
+  <nav class="max-lg:justify-center max-lg:items-center w-screen flex justify-around text-center">
+    <ul class="max-lg:hidden flex ">
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2 max-w-fit m-4 bg-blue-500 opacity-80">
         <a #linkNouveautees routerLink="nouveautées"><span class="block p-1">Nouveautés</span></a>
       </li>
@@ -22,7 +22,7 @@
       </li> -->
     </ul>
     <ul class="flex">
-      <div class="max-md:hidden flex">
+      <div class="max-lg:hidden flex">
 
         <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 px-2  max-w-fit m-4 bg-blue-500 opacity-80">
           <a routerLink="/inscription"><span class="block p-1" (click)="register()">Inscription</span></a>
@@ -33,13 +33,13 @@
       </div>
       <li routerLinkActive="active" class="rounded-2xl hover:bg-blue-600 p-1 max-w-fit m-4 bg-blue-500 opacity-80">
         <div class="search-container" title="la recherhce fonctionne seulment sur les films et séries">
-          <input #search class="max-md:w-full rounded-2xl search" type="text" name="search" id="search" placeholder="Search ..."
+          <input #search class="max-lg:w-full rounded-2xl search" type="text" name="search" id="search" placeholder="Search ..."
             (keyup)="onSearch(search.value)" disabled/>
           <mat-icon class="icon-search">search</mat-icon>
         </div>
       </li>
     </ul>
-    <ul class="md:hidden mr-6" (click)="handlerStyleMatMenu()">
+    <ul class="lg:hidden mr-6" (click)="handlerStyleMatMenu()">
       <button mat-mini-fab aria-label="icon button menu" color="primary" (click)="handlerStyleMatMenu()"
         class="hover:bg-blue-600 bg-blue-500 opacity-80" [matMenuTriggerFor]="menu">
         <mat-icon (click)="handlerStyleMatMenu()">menu</mat-icon>

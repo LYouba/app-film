@@ -1,12 +1,10 @@
-@use '@angular/material' as mat;
-@import "../../custom-theme.scss";
 
 p{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: mat.get-color-from-palette($warn, 500);
+  color: #f44336;
   font-size: xx-large;
   text-align: center;
 }
