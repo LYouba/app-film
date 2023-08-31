@@ -61,7 +61,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
 
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
 
   ]
 })

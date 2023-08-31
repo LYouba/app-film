@@ -16,10 +16,10 @@ import { DialogService } from 'src/app/services/dialog.service';
 @Component({
   selector: 'app-dialog-login',
   templateUrl: './dialog-login.component.html',
-  styleUrls: ['./dialog-login.component.css'],
+  styleUrls: ['./dialog-login.component.scss'],
 })
 export class DialogLoginComponent {
-
+  hide :boolean =true;
   dialogLogin: boolean = true;
 
   @ViewChildren('formLoginMatError', { read: ElementRef })
@@ -61,7 +61,7 @@ export class DialogLoginComponent {
       case 'email':
         const email = this.formLogin.controls.email;
         if (email.hasError('required')) return 'Le champ est obligatoire !';
-        if (email.hasError('email')) return "Le format n'est pas correct !";
+        if (email.hasError('email')) return "Le format n'est pas correct !. Caractères non autorisés <, >, \', \", :";
         break;
 
       case 'passWord':
@@ -111,7 +111,7 @@ export class DialogLoginComponent {
     //   passWord.hasError('minLength'),
     //   passWord.hasError('pattern')
     // );
-    // console.log(this.formLogin.hasError('email'));
+    console.log(this.formLogin.hasError('email'));
     // console.log(this.formLogin.hasError('passWord'));
     // console.log(this.formLogin.pristine);
     // console.log(this.formLogin.dirty);

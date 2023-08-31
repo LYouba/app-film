@@ -13,6 +13,7 @@ import { FilmSerieModule } from './module-film-serie/film-serie.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogLoginComponent } from './login/dialog-login/dialog-login.component';
 import { LoginComponent } from './login/login.component';
+import { DialogRegisterComponent } from './register/dialog-register/dialog-register.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LoginComponent } from './login/login.component';
     PageNotFoundComponent,
     DialogLoginComponent,
     LoginComponent,
+    DialogRegisterComponent,
   ],
   imports: [
     FormsModule, // [(ngModule)]

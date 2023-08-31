@@ -2,7 +2,7 @@ app-serie {
   flex: 0 2 240px;
 }
 
-@media not (min-width:640px){
+@media not (min-width: 768px){
   app-serie {
     flex: 0 2 96px;
   }

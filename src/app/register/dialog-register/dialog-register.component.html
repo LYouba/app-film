@@ -1,0 +1,36 @@
+<mat-dialog-content>
+    <h1>Inscription :</h1>
+    <hr />
+    <form [formGroup]="formRegister" (submit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>Nom :</mat-label>
+            <input matInput type="text" name="nom" formControlName="nom" />
+            <mat-error class="max-md:text-xs" #formRegisterMatError *ngIf="formRegister.get('nom')?.invalid">{{getErrorMessage('nom')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Prénom :</mat-label>
+            <input matInput type="text" name="prenom" formControlName="prenom" />
+            <mat-error class="max-md:text-xs" #formRegisterMatError
+                *ngIf="formRegister.get('prenom')?.invalid">{{getErrorMessage('prenom')}}</mat-error>
+        </mat-form-field> 
+        <mat-form-field>
+            <mat-label>Email :</mat-label>
+            <input matInput type="text" name="email" formControlName="email" />
+            <mat-error class="max-md:text-xs" #formRegisterMatError
+                *ngIf="formRegister.get('email')?.invalid">{{getErrorMessage('email')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Mot de passe :</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" name="passWord" formControlName="passWord" placeholder="Mot de passe" />
+            <button mat-icon-button matSuffix type="button" class="button-hide-pass-word" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error class="max-md:text-xs" #formRegisterMatError *ngIf="formRegister.get('passWord')?.invalid">{{getErrorMessage('passWord')}}</mat-error>
+        </mat-form-field>
+        <mat-checkbox labelPosition="before" formControlName="cgu" >CGU* :</mat-checkbox>
+        <button mat-button class="open-cgu text-xs" (click)="openDialog()">Open CGU</button>
+        <mat-error class="max-md:text-xs" #formRegisterMatError *ngIf="formRegister.get('cgu')?.invalid && formRegister.get('cgu')?.dirty">{{getErrorMessage('cgu')}}</mat-error>
+        <button mat-raised-button type="submit" class="button-validate" color="accent" [disabled]="formRegister.invalid">Valider</button>
+        <a routerLink="/login" mat-button class="max-md:text-center max-md:text-xs text-blue-500" (click)="login()">Se connecter ?</a>
+    </form>
+</mat-dialog-content>

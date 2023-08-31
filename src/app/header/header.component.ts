@@ -1,4 +1,4 @@
-import { Component, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
 import { SearchService } from '../module-film-serie/services/search.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +9,8 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
-import { filter } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
+import { DialogRegisterComponent } from '../register/dialog-register/dialog-register.component';
 
 @Component({
   selector: 'app-header',
@@ -17,8 +18,10 @@ import { filter } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
+  private ngUnsubscribe = new Subject<void>();
   @ViewChild('menu', { static: false }) menu!: MatMenu;
+  @ViewChild('search', { static: true })
+  elHtlmInputSearch!: ElementRef<HTMLInputElement>;
 
   constructor(
     private _renderer2: Renderer2,
@@ -27,7 +30,20 @@ export class HeaderComponent {
     private router: Router
   ) {}
 
-  handlerStyleMatMenu() { // changement su style au click pour la génération du composant menu
+  ngOnInit() {
+    // Activer ou désactivé le champ de recherhce
+    this.router.events
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event_2) => {
+        if (event_2 instanceof NavigationEnd) {
+          if (this.elHtlmInputSearch)
+           ( (event_2.url !== '/nouveaut%C3%A9es') && (event_2.url !== "/") )? this.elHtlmInputSearch.nativeElement.removeAttribute('disabled') : this.elHtlmInputSearch.nativeElement.setAttribute('disabled','true');
+        }
+      });
+  }
+
+  handlerStyleMatMenu() {
+    // changement su style au click pour la génération du composant menu
     const el = document.getElementById(this.menu.panelId);
     this._renderer2.setStyle(el, 'border-radius', '20px');
     this._renderer2.addClass(el, 'custom-menu'); // style globale !!
@@ -35,7 +51,13 @@ export class HeaderComponent {
 
   login() {
     this.dialogLogin.open(DialogLoginComponent, {
-      data: decodeURI(this.router.routerState.snapshot.url), 
+      data: decodeURI(this.router.routerState.snapshot.url),
+    });
+  }
+
+  register() {
+    this.dialogLogin.open(DialogRegisterComponent, {
+      data: decodeURI(this.router.routerState.snapshot.url), width:"50%"
     });
   }
 
@@ -47,17 +69,8 @@ export class HeaderComponent {
     this.searchService.setSearch(imputSearch);
   }
 
-  /**
-   * Determines whether click on pour activer ou désactivé le champ de recherhce
-   * @param elSearch
-   * @param elSible
-   */
-  desableOrenableSearch(elSearch: HTMLElement, elSible: HTMLElement) {
-    if (elSible.getAttribute('href') === '/nouveaut%C3%A9es') {
-      if (elSearch) elSearch.setAttribute('disabled', 'true');
-    } else {
-      if (elSearch) elSearch.removeAttribute('disabled');
-    }
-    // console.log(elSible.getAttribute('href'));
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
