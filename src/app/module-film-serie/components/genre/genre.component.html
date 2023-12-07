@@ -1,4 +1,4 @@
-<div *ngIf="(genre$ | async) as dataGenre" class="custom max-lg:h-20 max-lg:overflow-auto flex justify-center flex-wrap text-white sticky top-24 z-10">
+<div *ngIf="(genre$ | async) as dataGenre" class="hide-genre custom max-lg:h-20 max-lg:overflow-auto max-lg:top-16 flex justify-center flex-wrap text-white sticky top-24 z-10">
   <ng-container *ngIf="dataGenre.genres && dataGenre !== 0; else errors">
     <!-- <p>{{dataGenre.genres|json}}</p> -->
     <ng-container *ngFor="let genre of dataGenre.genres">
@@ -6,13 +6,13 @@
     </ng-container>
   </ng-container>
   <ng-template #errors>
-    <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
+    <!-- <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
       <ng-container *ngIf="dataGenre.status === 404 || dataGenre.status === 0; else errors">
         {{ dataGenre.statusText }}. code :{{ dataGenre.status }}
       </ng-container>
       <ng-template #errors>
         {{ dataGenre.error.errors[0].text }}. code :{{ dataGenre.error.errors[0].code }}
       </ng-template>
-    </div>
+    </div> -->
   </ng-template>
 </div>

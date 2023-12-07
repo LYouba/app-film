@@ -8,7 +8,8 @@ module.exports = {
       // colors: {
       //   'blue-btn-menu': '#243c5a',
       // },// na pas fonctionné !!!!
-      flex:{'2':'0 0 15rem'}
+      flex:{'2':'0 0 15rem'},
+      height : {'22.5':'360px'}
     },
   },
   plugins: [],

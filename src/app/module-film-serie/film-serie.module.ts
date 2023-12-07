@@ -10,8 +10,8 @@ import { ListSerieComponent } from './components/list-serie/list-serie.component
 import { SerieComponent } from './components/serie/serie.component';
 
 import { AppRoutingModule } from '../app-routing.module';
-import { StringPipe } from './pipes/string.pipe';
 import { TimePipe } from './pipes/time.pipe';
+import { SubStringPipe } from './pipes/sub-string.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { TimePipe } from './pipes/time.pipe';
     SerieComponent,
     GenreComponent,
     TimePipe,
-    StringPipe,
+    SubStringPipe
   ],
   imports: [
     CommonModule,

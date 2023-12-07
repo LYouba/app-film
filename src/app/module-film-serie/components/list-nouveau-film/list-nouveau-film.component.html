@@ -1,8 +1,6 @@
-<!-- pour créer une liste de tous les films qui vont sortir au cinéma
-  qui sont renvoyer par la requete en souscrivant à un observable -->
 <app-genre [genre_type]="'film'" (clickGenre)="getFilmByGenres($event)"></app-genre>
 
-<div *ngIf="films$ | async as data ; else loding" class="flex justify-center flex-wrap text-white">
+<div *ngIf="newFilms$ | async as data ; else loding" class="flex justify-center flex-wrap text-white">
   <ng-container *ngIf="data.films && data.films.length !== undefined; else errors">
     <ng-container *ngIf="data.films.length !==0; else empty">
       <ng-container *ngFor="let film of data.films">

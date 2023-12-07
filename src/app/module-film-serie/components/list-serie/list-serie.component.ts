@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, map, catchError, of, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import {
+  Observable,
+  map,
+  catchError,
+  of,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+} from 'rxjs';
 import { serie } from 'src/app/module-film-serie/models/serie.model';
 import { SearchService } from 'src/app/module-film-serie/services/search.service';
 import { SerieService } from 'src/app/module-film-serie/services/serie.service';
@@ -8,36 +15,41 @@ import { SerieService } from 'src/app/module-film-serie/services/serie.service';
 @Component({
   selector: 'app-list-serie',
   templateUrl: './list-serie.component.html',
-  styleUrls: ['./list-serie.component.css']
+  styleUrls: ['./list-serie.component.css'],
 })
 export class ListSerieComponent {
   series$!: Observable<any>;
 
-  constructor(private serviceSerie: SerieService, private router: Router, private searchService: SearchService) { }
+  constructor(
+    private serviceSerie: SerieService,
+    private searchService: SearchService
+  ) {}
 
   ngOnInit(): void {
     this.getSeries();
 
-    this.router.events.subscribe(_ => {
-      this.getSeries();
-    });
-
-    this.searchService.searchTermReadOnly$.pipe(
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap((searchWord) => {
-        if (searchWord !== '') { return this.getSeriesByFiltres('', searchWord) }
-        else { return this.getSeries(); }
-      })
-    ).subscribe()
+    this.searchService.searchTermReadOnly$
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((searchWord) => {
+          if (searchWord !== '') {
+            this.getSeriesByFiltres('', searchWord);
+          } else {
+            this.getSeries();
+          }
+          return of();
+        })
+      )
+      .subscribe();
   }
 
   getSeries() {
-    return this.series$ = this.serviceSerie.getSeries().pipe(
-      map(data => {
+    this.series$ = this.serviceSerie.getSeries().pipe(
+      map((data) => {
         let series: serie[] = [];
-        data.shows.forEach(value => {
-          if (value.seasons !== "0" && value.images.poster !== null) {
+        data.shows.forEach((value) => {
+          if (value.seasons !== '0' && value.images.poster !== null) {
             let x: serie = {
               id: value.id,
               title: value.title,
@@ -52,26 +64,25 @@ export class ListSerieComponent {
               status: value.status,
               country: value.country,
               language: value.language,
-            }
+            };
             series.push(x);
           }
-
-        })
-        return { series: series }
+        });
+        return { series: series };
       }),
-      catchError(error => of(error)),
+      catchError((error) => of(error))
     );
-
     // this.serie$.subscribe(x => console.log(x.serie))
   }
 
   getSeriesByFiltres(genre_serie: string = '', search: string = '') {
-    return this.series$ = this.serviceSerie.getSeriesByFiltres(genre_serie, search).pipe(
-      map(data => {
-        let series: serie[] = [];
-        data.shows.forEach(value => {
-          series.push(
-            {
+     this.series$ = this.serviceSerie
+      .getSeriesByFiltres(genre_serie, search)
+      .pipe(
+        map((data) => {
+          let series: serie[] = [];
+          data.shows.forEach((value) => {
+            series.push({
               id: value['id'],
               title: value['title'],
               creation: value['release_date'],
@@ -84,15 +95,13 @@ export class ListSerieComponent {
               length: '',
               status: '',
               country: '',
-              language: ''
-            }
-          )
-        });
-        return { series: series }
-      }),
-      catchError(error => of(error)),
-    );
+              language: '',
+            });
+          });
+          return { series: series };
+        }),
+        catchError((error) => of(error))
+      );
     // this.films$.subscribe(x => console.log(x))
   }
 }
-

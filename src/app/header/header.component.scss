@@ -1,5 +1,7 @@
+@import "../../custom-theme_pallete.scss";
+
 .active {
-  background-color: #c2185b;
+  background-color: map-get($pink-palette, 700);
 }
 .search-container {
   position: relative;

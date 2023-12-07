@@ -2,10 +2,10 @@
 <a routerLink="/series/{{singlSerie.id}}" routerLinkActive="active">
   <img *ngIf="singlSerie.images.poster; else elseBlock" class="max-lg:w-16 w-60 m-auto" src="{{singlSerie.images.poster}}" alt="Photo de couverture série">
   <ng-template #elseBlock>
-    <img class="max-lg:w-16 max-lg:h-24 w-60 h-80 m-auto" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture série">
+    <img class="max-lg:w-16 max-lg:h-24 w-60 h-22.5 m-auto" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture série">
   </ng-template>
-  <p class="max-lg:hidden max-lg:text-xs text-center">{{singlSerie.title}}</p>
-  <p class="max-lg:w-20 max-lg:text-xs text-center w-60">Date de sortie :{{singlSerie.creation}}</p>
+  <p class="max-lg:hidden max-lg:text-xs text-center">{{singlSerie.title| subString:':'}}</p>
+  <p class="max-lg:w-20 max-lg:text-xss text-center w-60">Date de sortie :{{singlSerie.creation}}</p>
 </a>
 </div>
 

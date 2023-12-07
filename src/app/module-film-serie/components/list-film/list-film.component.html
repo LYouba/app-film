@@ -1,6 +1,3 @@
-<!-- pour créer une liste de tous les films qui vont sortir au cinéma
-  qui sont renvoyer par la requete en souscrivant à un observable -->
-
 <app-genre [genre_type]="'film'" (clickGenre)="getFilmByFiltres($event)"></app-genre>
 
 <div *ngIf="films$ | async as data; else loding" class="flex justify-center flex-wrap text-white">
@@ -12,12 +9,12 @@
         ></app-film>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <ng-template #empty>
-    <div class="flex justify-center flex-wrap text-white">
-      <p class="max-lg:text-lg text-amber-50 text-2xl p-2 bg-red-600 rounded-2xl absolute top-1/2 -translate-y-1/2"> Aucun résultat trouvé</p>
-    </div>
-  </ng-template>
+    <ng-template #empty>
+      <div class="flex justify-center flex-wrap text-white">
+        <p class="max-lg:text-lg text-amber-50 text-2xl p-2 bg-red-600 rounded-2xl absolute top-1/2 -translate-y-1/2"> Aucun résultat trouvé</p>
+      </div>
+    </ng-template>
+  </ng-container> 
   <ng-template #errors>
     <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
       <ng-container *ngIf="data.status === 404 || data.status === 0; else errors">

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, catchError, debounceTime, distinctUntilChanged, ignoreElements, map, of, switchMap, tap } from 'rxjs';
-import { film } from 'src/app/module-film-serie/models/film.model';
+import { Film } from 'src/app/module-film-serie/models/film.model';
 import { FilmService } from 'src/app/module-film-serie/services/film.service';
 import { SearchService } from 'src/app/module-film-serie/services/search.service';
 
@@ -16,7 +15,6 @@ export class ListFilmComponent {
 
   constructor(
     private serviceFilm: FilmService,
-    private router: Router,
     private searchService: SearchService
   ) {
     // this.router.onSameUrlNavigation ='reload';
@@ -30,14 +28,6 @@ export class ListFilmComponent {
     this.getFilms();
 
     /**
-     * souscrire à l'evenement router qui ce declanche afin de recharger la page même si
-     * url de la route n'a pas changé
-     */
-    this.router.events.subscribe(_ => {
-      this.getFilms();
-    });
-
-    /**
      * souscrire à l'observable searchReponse$
      * url de la route n'a pas changé
     */
@@ -45,8 +35,9 @@ export class ListFilmComponent {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term) => {
-        if (term !== '') { return this.getFilmByFiltres('', term) }
-        else { return this.getFilms(); }
+        if (term !== '') { this.getFilmByFiltres('', term) }
+        else { this.getFilms(); }
+        return of();
       })
     ).subscribe()
   }
@@ -57,7 +48,7 @@ export class ListFilmComponent {
    * dans le service films directement"
    */
   getFilms() {
-    return this.films$ = this.serviceFilm.getFilms().pipe(
+    this.films$ = this.serviceFilm.getFilms().pipe(
       map(data => { return { films: data.movies } }),
       catchError(error => of(error)),
     );
@@ -67,9 +58,9 @@ export class ListFilmComponent {
   getFilmByFiltres(genre_film: string = '', search: string = '') {
     // console.log(genre);
 
-    return this.films$ = this.serviceFilm.getFilmsByFiltres(genre_film, search).pipe(
+    this.films$ = this.serviceFilm.getFilmsByFiltres(genre_film, search).pipe(
       map(data => {
-        let arrayFilms: film[] = [];
+        let arrayFilms: Film[] = [];
         data.movies.forEach(value => {
           arrayFilms.push(
             {

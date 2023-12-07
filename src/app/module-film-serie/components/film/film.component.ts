@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { film } from 'src/app/module-film-serie/models/film.model';
+import { Film } from 'src/app/module-film-serie/models/film.model';
 
 @Component({
   selector: 'app-film',
@@ -7,5 +7,5 @@ import { film } from 'src/app/module-film-serie/models/film.model';
   styleUrls: ['./film.component.css']
 })
 export class FilmComponent {
-  @Input() singlFilm!: film;
+  @Input() singlFilm!: Film;
 }

@@ -12,3 +12,9 @@ button {
   );
   border-radius: 16px;
 }
+
+@media not (min-height: 450px) {
+  .hide-genre{
+    display: none;
+  }
+}
