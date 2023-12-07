@@ -1,9 +1,9 @@
 <app-genre [genre_type]="'film'" (clickGenre)="getFilmByGenres($event)"></app-genre>
 
-<div *ngIf="newFilms$ | async as data ; else loding" class="flex justify-center flex-wrap text-white">
-  <ng-container *ngIf="data.films && data.films.length !== undefined; else errors">
-    <ng-container *ngIf="data.films.length !==0; else empty">
-      <ng-container *ngFor="let film of data.films">
+<div *ngIf="newFilms as data ; else loding" class="flex justify-center flex-wrap text-white">
+  <ng-container *ngIf="!errorLoding; else errors">
+    <ng-container *ngIf="data.movies.length !==0; else empty">
+      <ng-container *ngFor="let film of data.movies">
         <app-film
           [singlFilm]="film"
         ></app-film>
@@ -17,11 +17,11 @@
   </ng-container>
   <ng-template #errors>
     <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
-      <ng-container *ngIf="data.status === 404 || data.status === 0; else errors">
-        {{ data.statusText }}. code :{{ data.status }}
+      <ng-container *ngIf="errorLoding.status === 404 || errorLoding.status === 0; else errors">
+        {{ errorLoding.statusText }}. code :{{ errorLoding.status }}
       </ng-container>
       <ng-template #errors>
-        {{ data.error.errors[0].text }}. code :{{ data.error.errors[0].code }}
+        {{ errorLoding.error.errors[0].text }}. code :{{ errorLoding.error.errors[0].code }}
       </ng-template>
     </div>
   </ng-template>

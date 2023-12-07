@@ -1,6 +1,7 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Observable, catchError, map, of, tap } from 'rxjs';
-import { film } from 'src/app/module-film-serie/models/film.model';
+import { Observable, Subject, catchError, delay, map, of, takeUntil, tap } from 'rxjs';
+import { Film } from 'src/app/module-film-serie/models/film.model';
 import { FilmService } from 'src/app/module-film-serie/services/film.service';
 
 @Component({
@@ -9,52 +10,65 @@ import { FilmService } from 'src/app/module-film-serie/services/film.service';
   styleUrls: ['./list-nouveau-film.component.css'],
 })
 export class ListNouveauFilmComponent {
-  public newFilms$!: Observable<any>;
+  
+  private ngUnsubscribe = new Subject<void>();
+  
+  public newFilms: {movies: Film[], errors: []}| undefined = this.serviceFilm.films;
+  public errorLoding: any;
 
   constructor(private serviceFilm: FilmService) {}
 
   ngOnInit(): void {
-    this.getNewFilms();
+    this.serviceFilm.newFilms$.pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+      next: (value) => {        
+        this.newFilms = value;
+      },
+      error: (err) => {
+        this.errorLoding = err;
+        this.newFilms = {movies: [],errors: []};
+      },
+    });
+
+    if (!this.newFilms) this.getNewFilms();
   }
 
   getNewFilms() {
-    this.newFilms$ = this.serviceFilm.getMoviesUpComing().pipe(
-      map((data) => {
-        return { films: data.movies };
-      }),
-      catchError((error) => of(error))
-    );
+    this.serviceFilm.getMoviesUpComing();
   }
 
   getFilmByGenres(genre_film: string) {
-    this.newFilms$ = this.serviceFilm.getMoviesUpComing().pipe(
-      map((data) => {
-        let arrayFilms: film[] = [];
-        data.movies.forEach((movie) => {
-          this.serviceFilm
-            .getDetailsFilmByID(+movie.id)
-            .pipe(
-              map((data) => data.movie['genres']),
-              catchError((error) => of(error))
-            )
-            .subscribe((genre) => {
-              if (genre.includes(genre_film)) {
-                arrayFilms.push({
-                  id: movie.id,
-                  title: movie.title,
-                  production_year: movie.production_year,
-                  poster: movie.poster,
-                  imdb_id: movie.tmdb_id,
-                  followers: movie.followers,
-                  tmdb_id: movie.tmdb_id,
-                });
-              }
+    this.newFilms = undefined;
+    this.serviceFilm.films.movies.forEach((movie: Film) => {
+      this.serviceFilm
+        .getDetailsFilmByID(+movie.id)
+        .pipe(
+          map((data) => data.movie['genres']),
+          catchError((error) => of(error))
+        )
+        .subscribe((genre) => {
+          if (genre.includes(genre_film)) {
+            if (!this.newFilms) {
+              this.newFilms = {movies:[], errors:[]}
+            }
+            this.newFilms.movies.push({
+              id: movie.id,
+              title: movie.title,
+              production_year: movie.production_year,
+              poster: movie.poster,
+              imdb_id: movie.tmdb_id,
+              followers: movie.followers,
+              tmdb_id: movie.tmdb_id,
             });
+          }
         });
-        return { films: arrayFilms };
-      }),
-      catchError((error) => of(error))
-    );
-    // this.newFilms$.subscribe(x => console.log(x))
+    });
+  }
+
+  /**
+   * se désabonner de tous les observables et les eventListener
+   */
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
