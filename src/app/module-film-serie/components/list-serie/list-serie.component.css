@@ -2,6 +2,11 @@ app-serie {
   flex: 0 2;
 }
 
+.list-content {
+  overflow: auto;
+  height: 80vh;
+}
+
 @media not (min-width: 768px){
   app-serie {
     flex: 0 2;

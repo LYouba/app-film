@@ -1,0 +1,46 @@
+<div *ngIf="!firstRunder; else lodingDiv" class="flex justify-center flex-wrap text-white">
+    <ng-container *ngIf="!httpError; else Erreur">
+        <div *ngIf="loding" class="loader">
+            <div class="circle"></div>
+        </div>
+        <ng-container *ngIf="trackBy; else noTrackByTemplate">
+            <ng-container *ngFor="let item of items; trackBy:trackBy">
+                <ng-container [ngTemplateOutlet]="templateItem" [ngTemplateOutletContext]="{$implicit :item}"></ng-container>
+            </ng-container>
+        </ng-container>
+        <ng-template #noTrackByTemplate>
+            <ng-container *ngFor="let item of items;">
+                <ng-container [ngTemplateOutlet]="templateItem" [ngTemplateOutletContext]="{$implicit :item}"></ng-container>
+            </ng-container>   
+        </ng-template>
+    </ng-container>
+</div>
+
+<ng-template #Erreur>
+    <ng-container *ngIf="templateErreur; else defaultError">
+        <ng-container [ngTemplateOutlet]="templateErreur"></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #defaultError>    
+    <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
+        {{ httpError.text }}. code : {{ httpError.code }}
+    </div>
+    <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
+        {{ httpError.text }}. code : {{ httpError.code }}
+    </div>
+</ng-template>
+
+<ng-template #lodingDiv>
+    <ng-container *ngIf="templateLoding; else defaultLoding">
+        <ng-container [ngTemplateOutlet]="templateLoding"></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #defaultLoding>        
+    <div class="loader">
+        <div class="circle"></div>
+    </div>
+</ng-template>
+
+  

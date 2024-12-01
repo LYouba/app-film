@@ -2,15 +2,13 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
 import { SearchService } from '../module-film-serie/services/search.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogLoginComponent } from '../login/dialog-login/dialog-login.component';
+import { DialogLoginComponent } from '../connexion/login/dialog-login/dialog-login.component';
 import {
-  ActivatedRoute,
   NavigationEnd,
-  NavigationStart,
   Router,
 } from '@angular/router';
-import { Subject, filter, takeUntil } from 'rxjs';
-import { DialogRegisterComponent } from '../register/dialog-register/dialog-register.component';
+import { Subject, takeUntil } from 'rxjs';
+import { DialogRegisterComponent } from '../connexion/register/dialog-register/dialog-register.component';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +18,7 @@ import { DialogRegisterComponent } from '../register/dialog-register/dialog-regi
 export class HeaderComponent {
   private ngUnsubscribe = new Subject<void>();
   @ViewChild('menu', { static: false }) menu!: MatMenu;
-  @ViewChild('search', { static: true })
-  elHtlmInputSearch!: ElementRef<HTMLInputElement>;
+  @ViewChild('search', { static: true }) elHtlmInputSearch!: ElementRef<HTMLInputElement>;
 
   constructor(
     private _renderer2: Renderer2,
@@ -36,8 +33,9 @@ export class HeaderComponent {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event_2) => {
         if (event_2 instanceof NavigationEnd) {
+          const nativeElement = this.elHtlmInputSearch.nativeElement;
           if (this.elHtlmInputSearch)
-           ( (event_2.url !== '/nouveaut%C3%A9es') && (event_2.url !== "/") )? this.elHtlmInputSearch.nativeElement.removeAttribute('disabled') : this.elHtlmInputSearch.nativeElement.setAttribute('disabled','true');
+            ((event_2.url !== '/nouveaut%C3%A9es') && (event_2.url !== "/"))? nativeElement.removeAttribute('disabled') : nativeElement.setAttribute('disabled','true');
         }
       });
   }

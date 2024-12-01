@@ -1,33 +1,9 @@
-<app-genre [genre_type]="'film'" (clickGenre)="getFilmByGenres($event)"></app-genre>
-
-<div *ngIf="newFilms as data ; else loding" class="flex justify-center flex-wrap text-white">
-  <ng-container *ngIf="!errorLoding; else errors">
-    <ng-container *ngIf="data.movies.length !==0; else empty">
-      <ng-container *ngFor="let film of data.movies">
-        <app-film
-          [singlFilm]="film"
-        ></app-film>
-      </ng-container>
-    </ng-container>
-    <ng-template #empty>
-      <div class="flex justify-center flex-wrap text-white">
-        <p class="max-lg:text-lg text-amber-50 text-2xl p-2 bg-red-600 rounded-2xl absolute top-1/2 -translate-y-1/2"> Aucun résultat trouvé</p>
-      </div>
-    </ng-template>
-  </ng-container>
-  <ng-template #errors>
-    <div class="text-2xl absolute top-1/2 -translate-y-1/2 text-red-500">
-      <ng-container *ngIf="errorLoding.status === 404 || errorLoding.status === 0; else errors">
-        {{ errorLoding.statusText }}. code :{{ errorLoding.status }}
-      </ng-container>
-      <ng-template #errors>
-        {{ errorLoding.error.errors[0].text }}. code :{{ errorLoding.error.errors[0].code }}
-      </ng-template>
-    </div>
-  </ng-template>
-</div>
-<ng-template #loding>
-  <div class="flex justify-center flex-wrap text-white">
-    <p class="text-amber-50 text-2xl p-2 bg-red-600 rounded-2xl absolute top-1/2 -translate-y-1/2"> loading ... !!</p>
-  </div>
+<ng-template #card let-item>
+  <card [dataCard]="item.toCard()"></card>
 </ng-template>
+
+<app-genre [genreType]="TypeGenre.film" (clickGenre)="getFilmByGenre($event);"></app-genre>
+
+<div #scrollContainer class="list-content">
+  <app-list [items]="newFilms" [loding]="loding" [templateItem]="card" [httpError]="httpError" [trackBy]="filmTrackBy"></app-list>
+</div>

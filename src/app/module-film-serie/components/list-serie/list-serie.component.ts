@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
-  Observable,
-  map,
-  catchError,
   of,
   debounceTime,
   distinctUntilChanged,
   switchMap,
+  Observer,
+  takeUntil,
+  Subject,
+  map,
 } from 'rxjs';
-import { serie } from 'src/app/module-film-serie/models/serie.model';
+import {
+  ResponseSeries,
+  ResponseSeriesSearch,
+  Serie,
+  SerieSearch,
+} from 'src/app/module-film-serie/models/serie.model';
 import { SearchService } from 'src/app/module-film-serie/services/search.service';
 import { SerieService } from 'src/app/module-film-serie/services/serie.service';
+import { TypeGenre } from '../../models/genre.model';
+import { Errors } from '../../models/film.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-serie',
@@ -18,7 +27,21 @@ import { SerieService } from 'src/app/module-film-serie/services/serie.service';
   styleUrls: ['./list-serie.component.css'],
 })
 export class ListSerieComponent {
-  series$!: Observable<any>;
+  static LIMIT_NB_SERIE: number = 50;
+  static ADD_TO_LIMIT: number = 25;
+
+  private limitSerie: number = ListSerieComponent.LIMIT_NB_SERIE;
+  private fetchSerie: boolean = true;
+
+  private subscription: Subject<boolean> = new Subject();
+  @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
+
+  TypeGenre = TypeGenre;
+  series: Serie[] = [];
+  httpError!: Errors;
+  loding!: boolean;
+  textSearch: string = '';
+  genreSearch: string = '';
 
   constructor(
     private serviceSerie: SerieService,
@@ -26,13 +49,22 @@ export class ListSerieComponent {
   ) {}
 
   ngOnInit(): void {
+    this.loding = true;
+
     this.getSeries();
 
     this.searchService.searchTermReadOnly$
       .pipe(
-        debounceTime(400),
+        takeUntil(this.subscription),
+        debounceTime(100),
         distinctUntilChanged(),
         switchMap((searchWord) => {
+          this.loding = true;
+          this.series = [];
+          this.limitSerie = ListSerieComponent.LIMIT_NB_SERIE;
+          this.fetchSerie = true;
+          this.genreSearch = '';
+          this.textSearch = searchWord;
           if (searchWord !== '') {
             this.getSeriesByFiltres('', searchWord);
           } else {
@@ -44,64 +76,144 @@ export class ListSerieComponent {
       .subscribe();
   }
 
-  getSeries() {
-    this.series$ = this.serviceSerie.getSeries().pipe(
-      map((data) => {
-        let series: serie[] = [];
-        data.shows.forEach((value) => {
-          if (value.seasons !== '0' && value.images.poster !== null) {
-            let x: serie = {
-              id: value.id,
-              title: value.title,
-              followers: value.followers,
-              creation: value.creation,
-              images: { poster: value.images.poster },
-              description: value.description,
-              seasons: value.seasons,
-              episodes: value.episodes,
-              genres: value.genres,
-              length: value.length,
-              status: value.status,
-              country: value.country,
-              language: value.language,
-            };
-            series.push(x);
-          }
-        });
-        return { series: series };
-      }),
-      catchError((error) => of(error))
-    );
-    // this.serie$.subscribe(x => console.log(x.serie))
+  ngAfterViewInit() {
+    if (this.scrollContainer) {
+      (this.scrollContainer.nativeElement as HTMLDivElement).addEventListener(
+        'scrollend',
+        () => this.onScroll()
+      );
+    }
   }
 
-  getSeriesByFiltres(genre_serie: string = '', search: string = '') {
-     this.series$ = this.serviceSerie
-      .getSeriesByFiltres(genre_serie, search)
+  private onScroll() {
+    let div = this.scrollContainer.nativeElement as HTMLDivElement;
+
+    if (
+      div.scrollTop + div.clientHeight >= div.scrollHeight - 20 &&
+      !this.loding &&
+      this.fetchSerie
+    ) {
+      this.loding = true;
+
+      if (
+        this.limitSerie - ListSerieComponent.ADD_TO_LIMIT ===
+        this.series.length
+      ) {
+        if (this.textSearch !== '') {
+          this.getSeriesByFiltres('', this.textSearch);
+        } else if (this.genreSearch !== '') {
+          this.getSeriesByFiltres(this.genreSearch, '');
+        } else {
+          this.getSeries();
+        }
+      }
+    }
+  }
+
+  getSerieByGenre(genreSerie: string) {
+    this.loding = true;
+    this.series = [];
+    this.limitSerie = ListSerieComponent.LIMIT_NB_SERIE;
+    this.fetchSerie = true;
+    this.textSearch = '';
+    this.genreSearch = genreSerie;
+    
+    if (genreSerie !== "") {  
+      this.getSeriesByFiltres(genreSerie, '');
+    }else{
+      this.getSeries()
+    }
+  }
+
+  getSeries() {
+    this.serviceSerie
+      .getSeries(this.limitSerie)
+      .pipe(takeUntil(this.subscription))
+      .subscribe(this.serieDetailsObserver);
+  }
+
+  getSeriesByFiltres(genreSerie: string = '', search: string = '') {
+    this.serviceSerie
+      .getSeriesByFiltres(genreSerie, search, this.limitSerie)
       .pipe(
+        takeUntil(this.subscription),
         map((data) => {
-          let series: serie[] = [];
-          data.shows.forEach((value) => {
-            series.push({
-              id: value['id'],
-              title: value['title'],
-              creation: value['release_date'],
-              images: { poster: value['poster'] },
-              followers: '',
-              description: '',
-              seasons: '',
-              episodes: '',
-              genres: {},
-              length: '',
-              status: '',
-              country: '',
-              language: '',
-            });
+          let arraySeries: SerieSearch[] = [];
+          data.shows.forEach((serieSearch) => {
+            arraySeries.push(SerieSearch.getInstenceSerieSearch(serieSearch));
           });
-          return { series: series };
-        }),
-        catchError((error) => of(error))
-      );
-    // this.films$.subscribe(x => console.log(x))
+          return new ResponseSeriesSearch(
+            arraySeries,
+            data.total,
+            data.locale,
+            data.errors
+          );
+        })
+      )
+      .subscribe(this.serieSearchObserver);
+  }
+
+  private serieSearchObserver: Partial<Observer<ResponseSeriesSearch>> = {
+    next: (resp: ResponseSeriesSearch) => {
+      if (this.textSearch !== '') {
+        this.series = [];
+      }
+      this.loding = false;
+
+      resp.shows.forEach((serieSearch) => {
+        if (!this.series.some((serie) => serieSearch.id === serie.id)) {
+          this.series.push(Serie.serieSearchToSerie(serieSearch));
+        }
+      });
+      if (this.limitSerie === this.series.length) {
+        this.limitSerie = this.limitSerie + ListSerieComponent.ADD_TO_LIMIT;
+      } else {
+        this.fetchSerie = false;
+      }
+    },
+    error: (err) => this.handlerError(err),
+  };
+
+  private serieDetailsObserver: Partial<Observer<ResponseSeries>> = {
+    next: (resp: ResponseSeries) => {
+      this.loding = false;
+
+      resp.shows.forEach((serieDetails) => {
+        if (!this.series.some((serie) => serieDetails.id === serie.id)) {
+          this.series.push(Serie.serieDetailsToSerie(serieDetails));
+        }
+      });
+
+      if (this.limitSerie === this.series.length) {
+        this.limitSerie = this.limitSerie + ListSerieComponent.ADD_TO_LIMIT;
+      } else {
+        this.fetchSerie = false;
+      }
+    },
+    error: (err) => this.handlerError(err),
+  };
+
+  private handlerError(err: any) {
+    this.loding = false;
+    if (err instanceof HttpErrorResponse) {
+      if (err.status === 404 || err.status === 0) {
+        this.httpError = new Errors(err.status, err.error);
+      } else {
+        const errors = err.error.errors as Errors[];
+        this.httpError = new Errors(errors[0].code, errors[0].text);
+      }
+    } else {
+      this.httpError = new Errors(999, 'Erreur Inconnue');
+    }
+  }
+
+  serieTrackBy(index: number, film: Serie) {
+    return film.id;
+  }
+
+  ngOnDestroy() {
+    this.subscription.next(true);
+    this.subscription.complete();
+    this.subscription.unsubscribe();
   }
 }

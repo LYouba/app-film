@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, of, map, catchError } from 'rxjs';
 import { FilmService } from 'src/app/module-film-serie/services/film.service';
 import { SerieService } from 'src/app/module-film-serie/services/serie.service';
+import { ResponseGenres } from '../../models/film.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { TypeGenre } from '../../models/genre.model';
 
 @Component({
   selector: 'app-genre',
@@ -9,8 +12,11 @@ import { SerieService } from 'src/app/module-film-serie/services/serie.service';
   styleUrls: ['./genre.component.scss'],
 })
 export class GenreComponent {
-  genre$: Observable<any> = of(0);
-  @Input() genre_type!: string;
+  selectedGenre!: string;
+  selectedBtn!: HTMLButtonElement | null;
+
+  genre$: Observable<ResponseGenres | HttpErrorResponse> = of();
+  @Input() genreType!: TypeGenre;
   @Output() clickGenre = new EventEmitter<string>();
 
   constructor(
@@ -19,7 +25,7 @@ export class GenreComponent {
   ) {}
 
   ngOnInit() {
-    if (this.genre_type === 'film') {
+    if (this.genreType === TypeGenre.film) {
       this.getGenresFilms();
     } else {
       this.getGenresSeries();
@@ -27,29 +33,55 @@ export class GenreComponent {
   }
 
   getGenresFilms() {
-    this.genre$ = this.serviceFilm.getGenresFilms().pipe(
-      // transformer en un tableau pour simplifier la lecture dans la templetre
-      //(avant c'était un onjet et il y a eu des soucis de conversion)
-      map((data) => {
-        return { genres: Object.entries(data.genres) };
-      }),
-
-      catchError((error) => of(error))
-    );
-    // this.genre$.subscribe(x => console.log(x.genres))
+    this.genre$ = this.serviceFilm
+      .getGenresFilms()
+      .pipe(catchError((error) => of(error)));
   }
 
   getGenresSeries() {
-    this.genre$ = this.serviceSerie.getGenresSeries().pipe(
-      map((data) => {
-        return { genres: Object.entries(data.genres) };
-      }),
-      catchError((error) => of(error))
-    );
-    // this.genre$.subscribe(x => console.log(x.genres))
+    this.genre$ = this.serviceSerie
+      .getGenresSeries()
+      .pipe(catchError((error) => of(error)));
   }
 
-  onClick(genre: string) {
-    this.clickGenre.emit(genre);
+  onClick(genre: string, btn: HTMLButtonElement) {
+    btn.style.backgroundColor = 'green';
+    if (this.selectedBtn) {
+      this.selectedBtn.style.backgroundColor = '';
+    }
+    if (this.selectedGenre !== genre) {
+      this.clickGenre.emit(genre);
+      this.selectedGenre = genre;
+      this.selectedBtn = btn;
+    }else{
+      this.selectedGenre = "";
+      this.selectedBtn = null;
+      this.clickGenre.emit("");
+    }
+
+  }
+
+  isResponseGenres(value: ResponseGenres | HttpErrorResponse): boolean {
+    return value instanceof ResponseGenres;
+  }
+
+  castResponseGenres(
+    value: ResponseGenres | HttpErrorResponse
+  ): ResponseGenres {
+    if (value instanceof ResponseGenres) {
+      return new ResponseGenres(value.genres, value.locale, value.errors);
+    } else {
+      return new ResponseGenres({}, '', []);
+    }
+  }
+
+  castHttpErrorResponse(
+    value: ResponseGenres | HttpErrorResponse
+  ): HttpErrorResponse {
+    if (value instanceof HttpErrorResponse) {
+      return value;
+    } else {
+      return new HttpErrorResponse({});
+    }
   }
 }

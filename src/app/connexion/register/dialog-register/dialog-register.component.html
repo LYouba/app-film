@@ -1,7 +1,7 @@
 <mat-dialog-content>
     <h1>Inscription :</h1>
     <hr />
-    <form [formGroup]="formRegister" (submit)="onSubmit()">
+    <form [formGroup]="formRegister" (submit)="onSubmit($event)">
         <mat-form-field>
             <mat-label>Nom :</mat-label>
             <input matInput type="text" name="nom" formControlName="nom" />

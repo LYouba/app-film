@@ -2,11 +2,17 @@ app-film {
   flex: 0 2;
 }
 
-@media not (min-width: 768px){
+.list-content {
+  overflow: auto;
+  height: 80vh;
+}
+
+@media not (min-width: 768px) {
   app-film {
     flex: 0 2;
   }
 }
+
 /* *{
   color: aliceblue;
 } */

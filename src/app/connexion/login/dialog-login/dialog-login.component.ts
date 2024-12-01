@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatError } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
-import { DialogService } from 'src/app/services/dialog.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dialog-login',
@@ -31,8 +31,27 @@ export class DialogLoginComponent {
   constructor(
     private route: Router,
     public dialogRefLogin: MatDialogRef<DialogLoginComponent>,
-    @Inject(MAT_DIALOG_DATA) private url: string // private serviceDialogLogin : DialogService,
+    @Inject(MAT_DIALOG_DATA) private url: string,
+    private auth : AuthService,
   ) {}
+
+  formLogin = new FormGroup({
+    email: new FormControl('', [
+      Validators.email,
+      Validators.required,
+      Validators.pattern(new RegExp('^.+[^\\s<>\'":]$')),
+    ]),
+    passWord: new FormControl('', [
+      Validators.maxLength(8),
+      Validators.minLength(4),
+      Validators.pattern(
+        new RegExp(
+          '^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s<>\'"]){4,8}$'
+        )
+      ),
+      Validators.required,
+    ]),
+  });
 
   ngOnInit() {
     this.subscriptionDialogRefLoginAfterClosed = this.dialogRefLogin
@@ -78,24 +97,6 @@ export class DialogLoginComponent {
     return '';
   }
 
-  formLogin = new FormGroup({
-    email: new FormControl('', [
-      Validators.email,
-      Validators.required,
-      Validators.pattern(new RegExp('^.+[^\\s<>\'":]$')),
-    ]),
-    passWord: new FormControl('', [
-      Validators.maxLength(8),
-      Validators.minLength(4),
-      Validators.pattern(
-        new RegExp(
-          '^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s<>\'"]){4,8}$'
-        )
-      ),
-      Validators.required,
-    ]),
-  });
-
   // permet de changer le style position absolut du parent de mat error pour s'adapter au respencive
   ngAfterViewChecked() {
     this.elDivMatError.forEach((el) => {
@@ -105,6 +106,12 @@ export class DialogLoginComponent {
   }
 
   onSubmit(e: Event) {
+    
+    this.auth.logIn({email : this.formLogin.value.email!, passWord: this.formLogin.value.passWord!})
+    console.log(e);
+    console.log(this);
+    
+    // this.auth.registerUser()
     // const passWord = this.formLogin.controls.passWord;
     // console.log(
     //   passWord,

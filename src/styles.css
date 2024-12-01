@@ -4,6 +4,7 @@
 @tailwind utilities;
 html,
 body {
+  overflow: hidden;
   /* height: 100%; */ /* utile si la page ne prend pas toutes la page */
 }
 body {

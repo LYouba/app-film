@@ -6,10 +6,7 @@ import { ListFilmComponent } from './module-film-serie/components/list-film/list
 import { ListSerieComponent } from './module-film-serie/components/list-serie/list-serie.component';
 import { DetailsSerieComponent } from './module-film-serie/components/details-serie/details-serie.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthGuard } from './auth/auth.guard';
-import { LoginComponent } from './login/login.component';
-import { DialogLoginComponent } from './login/dialog-login/dialog-login.component';
-
+import { AuthGuard } from './connexion/auth/auth.guard';
 
 const routes: Routes = [
   // {

@@ -6,13 +6,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SubStringPipe implements PipeTransform {
 
   transform(value: String, separator: String): String {
-    if (value.length<30) {
+    if(!value)
+      value = "Pas de titre";
+
+    if (value.length<20) {
       return value
     }
-    if (value.includes(':')) {
-     return value.split(`${separator}`)[0]
-    }
-    return value.slice(0, 30).concat('...');
+    
+    return value.slice(0, 20).concat('...');
   }
 
 }
