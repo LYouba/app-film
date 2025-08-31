@@ -25,7 +25,6 @@ import { CardComponent } from '../../shared/card/card.component';
     selector: 'app-list-nouveau-film',
     templateUrl: './list-nouveau-film.component.html',
     styleUrls: ['./list-nouveau-film.component.css'],
-    standalone: true,
     imports: [CardComponent, GenreComponent, ListComponent]
 })
 export class ListNouveauFilmComponent {

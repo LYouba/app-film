@@ -11,7 +11,6 @@ import { NgIf, NgFor, AsyncPipe } from '@angular/common';
     selector: 'app-genre',
     templateUrl: './genre.component.html',
     styleUrls: ['./genre.component.scss'],
-    standalone: true,
     imports: [NgIf, NgFor, AsyncPipe]
 })
 export class GenreComponent {

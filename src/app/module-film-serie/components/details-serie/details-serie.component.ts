@@ -9,7 +9,6 @@ import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
     selector: 'app-details-serie',
     templateUrl: './details-serie.component.html',
     styleUrls: ['./details-serie.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, AsyncPipe, KeyValuePipe, TimePipe]
 })
 export class DetailsSerieComponent {

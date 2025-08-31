@@ -1,6 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-@Component({ template: '' })
+@Component({
+    template: '',
+    standalone: false
+})
 export abstract class AbstractListElement {
   static LIMIT_NB_FILM: number = 50;
   static ADD_TO_LIMIT: number = 25;

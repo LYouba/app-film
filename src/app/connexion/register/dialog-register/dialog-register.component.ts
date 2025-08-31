@@ -24,7 +24,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     selector: 'app-dialog-register',
     templateUrl: './dialog-register.component.html',
     styleUrls: ['./dialog-register.component.scss'],
-    standalone: true,
     imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NgIf, MatButtonModule, MatIconModule, MatCheckboxModule]
 })
 export class DialogRegisterComponent {

@@ -13,7 +13,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    standalone: true,
     imports: [RouterLink, RouterLinkActive, MatIconModule, MatButtonModule, MatMenuModule, MatDialogModule]
 })
 export class HeaderComponent {

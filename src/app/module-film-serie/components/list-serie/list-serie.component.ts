@@ -28,7 +28,6 @@ import { CardComponent } from '../../shared/card/card.component';
     selector: 'app-list-serie',
     templateUrl: './list-serie.component.html',
     styleUrls: ['./list-serie.component.css'],
-    standalone: true,
     imports: [CardComponent, GenreComponent, ListComponent]
 })
 export class ListSerieComponent {

@@ -9,7 +9,6 @@ import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
     selector: 'app-details-film',
     templateUrl: './details-film.component.html',
     styleUrls: ['./details-film.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, AsyncPipe, KeyValuePipe, TimePipe]
 })
 export class DetailsFilmComponent {

@@ -27,7 +27,6 @@ import { CardComponent } from '../../shared/card/card.component';
     selector: 'app-list-film',
     templateUrl: './list-film.component.html',
     styleUrls: ['./list-film.component.css'],
-    standalone: true,
     imports: [CardComponent, GenreComponent, ListComponent]
 })
 export class ListFilmComponent extends AbstractListElement{

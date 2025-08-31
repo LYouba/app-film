@@ -13,7 +13,6 @@ import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
     selector: 'app-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, NgTemplateOutlet]
 })
 export class ListComponent<T> implements OnChanges {

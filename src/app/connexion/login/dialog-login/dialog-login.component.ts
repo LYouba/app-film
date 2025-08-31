@@ -21,7 +21,6 @@ import { MatInputModule } from '@angular/material/input';
     selector: 'app-dialog-login',
     templateUrl: './dialog-login.component.html',
     styleUrls: ['./dialog-login.component.scss'],
-    standalone: true,
     imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NgIf, MatButtonModule, MatIconModule]
 })
 export class DialogLoginComponent {

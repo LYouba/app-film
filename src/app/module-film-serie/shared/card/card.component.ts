@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
     selector: 'card',
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.css'],
-    standalone: true,
     imports: [RouterLink, NgIf]
 })
 export class CardComponent implements OnInit {
