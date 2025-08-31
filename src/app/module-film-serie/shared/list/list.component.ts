@@ -10,13 +10,12 @@ import { Errors } from '../../models/film.model';
 import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
 
 @Component({
-    selector: 'app-list',
-    templateUrl: './list.component.html',
-    styleUrls: ['./list.component.css'],
-    imports: [NgIf, NgFor, NgTemplateOutlet]
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+  imports: [NgIf, NgFor, NgTemplateOutlet],
 })
 export class ListComponent<T> implements OnChanges {
-  
   firstRunder: boolean = true;
 
   @Input() trackBy?: TrackByFunction<T>;
@@ -36,7 +35,6 @@ export class ListComponent<T> implements OnChanges {
   }
 
   ngOnInit() {
-
     this.firstRunder = false;
 
     const properties = Object.keys(this.changes);
