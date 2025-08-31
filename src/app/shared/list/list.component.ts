@@ -6,8 +6,8 @@ import {
   TemplateRef,
   TrackByFunction,
 } from '@angular/core';
-import { Errors } from '../../models/film.model';
 import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { Errors } from 'src/app/film-serie/models/film.model';
 
 @Component({
   selector: 'app-list',

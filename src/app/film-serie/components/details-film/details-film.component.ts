@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
-import { FilmService } from 'src/app/module-film-serie/services/film.service';
-import { TimePipe } from '../../pipes/time.pipe';
+import { FilmService } from 'src/app/film-serie/services/film.service';
+import { TimePipe } from 'src/app/shared/pipes/time.pipe';
 import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
 
 @Component({

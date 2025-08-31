@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, catchError, of } from 'rxjs';
-import { SerieService } from 'src/app/module-film-serie/services/serie.service';
-import { TimePipe } from '../../pipes/time.pipe';
+import { SerieService } from 'src/app/film-serie/services/serie.service';
+import { TimePipe } from 'src/app/shared/pipes/time.pipe';
 import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
 
 @Component({

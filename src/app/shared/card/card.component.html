@@ -1,7 +1,13 @@
 <div class="max-lg:w-fit max-lg:m-1 max-lg:p-1 m-2 p-1 bg-white bg-opacity-5 rounded-2xl hover:contrast-125 hover:bg-opacity-40">
   <a routerLink="/films/{{card.id}}" class="max-lg:h-24 max-lg:w-16 w-[133.33px] h-22.5 m-auto">
     <img *ngIf="card.imgSrc; else elseBlock" class=" w-[inherit] h-[inherit] object-cover rounded-2xl" src="{{card.imgSrc}}" alt="Photo de couverture film">
-    <p class="max-lg:hidden max-lg:text-xs text-xs text-center w-[inherit] truncate">{{card.title}}</p>
+
+    @if (card.title) {
+      <p class="max-lg:hidden max-lg:text-xs text-xs text-center w-[inherit] truncate">{{card.title}}</p>
+    } @else {
+      <p class="max-lg:hidden max-lg:text-xs text-xs text-center w-[inherit] truncate">Pas de titre</p>
+    }
+
     <p class="max-lg:text-xss text-xs break-all text-center">Date sortie <span class="max-lg:block">{{card.anneeProduction}}</span></p>
   </a>
 </div>

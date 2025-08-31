@@ -1,6 +1,6 @@
 
 button {
-  background-color: #884c29;
+  background-color: #2ebbd4;
 }
 
 .selected{
@@ -11,10 +11,10 @@ button {
   background: linear-gradient(
     to left,
     #bbdefb3d,
-    #1565c0,
+    #000000,
     #bbdefb3b,
   );
-  border-radius: 16px;
+  border-radius: 1px;
 }
 
 @media not (min-height: 450px) {

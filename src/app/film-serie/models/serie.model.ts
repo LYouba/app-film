@@ -1,4 +1,4 @@
-import { Card, CardInterface } from '../shared/models/card.model';
+import { CardInterface, Card } from 'src/app/shared/models/card.model';
 import { Errors } from './film.model';
 
 export class ResponseSeries {

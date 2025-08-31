@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
-import { SearchService } from '../module-film-serie/services/search.service';
+import { SearchService } from '../film-serie/services/search.service';
 import { DialogLoginComponent } from '../connexion/login/dialog-login/dialog-login.component';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';

@@ -1,7 +1,7 @@
 <div *ngIf="(genre$ | async) as dataGenre" class="hide-genre custom max-lg:h-20 max-lg:overflow-auto max-lg:top-16 flex justify-center flex-wrap text-white sticky top-24 z-10">
   <ng-container *ngIf="isResponseGenres(dataGenre); else errors">
     <ng-container *ngFor="let genre of castResponseGenres(dataGenre).getGenreArray()">
-      <button #btn class=" max-lg:text-xs p-1 rounded-2xl m-0" (click)="onClick(genre, btn)">{{genre}}</button>
+      <button #btn class=" max-lg:text-xl p-1 rounded-md m-1" (click)="onClick(genre, btn)">{{genre}}</button>
     </ng-container>
   </ng-container>
   <ng-template #errors>

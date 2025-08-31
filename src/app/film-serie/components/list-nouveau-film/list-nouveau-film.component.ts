@@ -14,12 +14,12 @@ import {
   Errors,
   Movie,
   ResponseMovies,
-} from 'src/app/module-film-serie/models/film.model';
-import { FilmService } from 'src/app/module-film-serie/services/film.service';
+} from 'src/app/film-serie/models/film.model';
+import { FilmService } from 'src/app/film-serie/services/film.service';
 import { TypeGenre } from '../../models/genre.model';
-import { ListComponent } from '../../shared/list/list.component';
+import { ListComponent } from 'src/app/shared/list/list.component';
 import { GenreComponent } from '../genre/genre.component';
-import { CardComponent } from '../../shared/card/card.component';
+import { CardComponent } from 'src/app/shared/card/card.component';
 
 @Component({
     selector: 'app-list-nouveau-film',

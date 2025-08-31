@@ -14,15 +14,15 @@ import {
   ResponseSeriesSearch,
   Serie,
   SerieSearch,
-} from 'src/app/module-film-serie/models/serie.model';
-import { SearchService } from 'src/app/module-film-serie/services/search.service';
-import { SerieService } from 'src/app/module-film-serie/services/serie.service';
+} from 'src/app/film-serie/models/serie.model';
+import { SearchService } from 'src/app/film-serie/services/search.service';
+import { SerieService } from 'src/app/film-serie/services/serie.service';
 import { TypeGenre } from '../../models/genre.model';
 import { Errors } from '../../models/film.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ListComponent } from '../../shared/list/list.component';
+import { ListComponent } from 'src/app/shared/list/list.component';
+import { CardComponent } from 'src/app/shared/card/card.component';
 import { GenreComponent } from '../genre/genre.component';
-import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
     selector: 'app-list-serie',
@@ -121,8 +121,8 @@ export class ListSerieComponent {
     this.fetchSerie = true;
     this.textSearch = '';
     this.genreSearch = genreSerie;
-    
-    if (genreSerie !== "") {  
+
+    if (genreSerie !== "") {
       this.getSeriesByFiltres(genreSerie, '');
     }else{
       this.getSeries()

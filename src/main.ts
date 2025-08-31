@@ -7,12 +7,11 @@ import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http'
 import { AppRoutingModule } from './app/app-routing.module';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { FilmSerieModule } from './app/module-film-serie/film-serie.module';
 
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(FilmSerieModule, BrowserModule, AppRoutingModule),
+        importProvidersFrom(BrowserModule, AppRoutingModule),
         provideAnimations(),
         provideHttpClient(withInterceptorsFromDi())
     ]
