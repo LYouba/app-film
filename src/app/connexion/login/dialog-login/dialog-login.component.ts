@@ -65,7 +65,7 @@ export class DialogLoginComponent {
     //   this.subscriptionDialogRefLoginAfterOpen = this.dialogRefLogin.afterOpened().subscribe(_ => this.serviceDialogLogin.setDialogLoginState(true));
   }
 
-  changeContentDialog() { 
+  changeContentDialog() {
     if (this.dialogLogin) {
       this.formLogin.controls.passWord.disable()
       this.dialogLogin =false
@@ -106,11 +106,11 @@ export class DialogLoginComponent {
   }
 
   onSubmit(e: Event) {
-    
-    this.auth.logIn({email : this.formLogin.value.email!, passWord: this.formLogin.value.passWord!})
-    console.log(e);
-    console.log(this);
-    
+
+    // this.auth.logIn({email : this.formLogin.value.email!, passWord: this.formLogin.value.passWord!})
+    // console.log(e);
+    // console.log(this);
+
     // this.auth.registerUser()
     // const passWord = this.formLogin.controls.passWord;
     // console.log(
@@ -118,7 +118,7 @@ export class DialogLoginComponent {
     //   passWord.hasError('minLength'),
     //   passWord.hasError('pattern')
     // );
-    console.log(this.formLogin.hasError('email'));
+    // console.log(this.formLogin.hasError('email'));
     // console.log(this.formLogin.hasError('passWord'));
     // console.log(this.formLogin.pristine);
     // console.log(this.formLogin.dirty);

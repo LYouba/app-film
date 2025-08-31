@@ -27,12 +27,12 @@ export class ListNouveauFilmComponent {
   private static LIMIT_NB_FILM: number = 50;
   private static ADD_TO_LIMIT: number = 25;
 
+  @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
+  private limitMovie: number = ListNouveauFilmComponent.LIMIT_NB_FILM;
+
   private subscription: Subject<boolean> = new Subject();
 
-  @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
-
   private saveNewFilms!: Movie[];
-  private limitMovie: number = ListNouveauFilmComponent.LIMIT_NB_FILM;
   private fetchMovieOnScroll: boolean = true;
   private saveWhenNoFetchDataByGenre: boolean = true;
   private genreSearch: string | null = null;
@@ -68,14 +68,11 @@ export class ListNouveauFilmComponent {
     let div = this.scrollContainer.nativeElement as HTMLDivElement;
 
     if (
-      div.scrollTop + div.clientHeight >= div.scrollHeight &&
-      !this.loding &&
-      this.fetchMovieOnScroll
+      div.scrollTop + div.clientHeight >= div.scrollHeight && !this.loding && this.fetchMovieOnScroll
     ) {
       this.loding = true;
       if (
-        this.limitMovie - ListNouveauFilmComponent.ADD_TO_LIMIT ===
-        this.newFilms.length
+        this.limitMovie - ListNouveauFilmComponent.ADD_TO_LIMIT === this.newFilms.length
       ) {
         if (this.genreSearch) {
           this.getFilmByFiltres(this.genreSearch);

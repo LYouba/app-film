@@ -148,7 +148,7 @@ export class DialogRegisterComponent {
       this.formRegister.value.email!,
       this.formRegister.value.passWord!
     );
-    this.auth.registerUser(user)
+    // this.auth.registerUser(user)
     //.subscribe({
   //     next: (data) => {
   //       console.log(data);

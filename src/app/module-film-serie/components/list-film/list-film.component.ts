@@ -18,21 +18,18 @@ import {
 import { FilmService } from 'src/app/module-film-serie/services/film.service';
 import { SearchService } from 'src/app/module-film-serie/services/search.service';
 import { TypeGenre } from '../../models/genre.model';
+import { AbstractListElement } from '../AbstractListElement';
 
 @Component({
   selector: 'app-list-film',
   templateUrl: './list-film.component.html',
   styleUrls: ['./list-film.component.css'],
 })
-export class ListFilmComponent {
-  static LIMIT_NB_FILM: number = 50;
-  static ADD_TO_LIMIT: number = 25;
+export class ListFilmComponent extends AbstractListElement{
 
-  private limitMovie: number = ListFilmComponent.LIMIT_NB_FILM;
   private fetchMovie: boolean = true;
 
   private subscription: Subject<boolean> = new Subject();
-  @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
   TypeGenre = TypeGenre;
   films: Movie[] = [];
@@ -45,7 +42,7 @@ export class ListFilmComponent {
     private serviceFilm: FilmService,
     private searchService: SearchService
   ) {
-    // this.router.onSameUrlNavigation ='reload';
+    super();
   }
 
   ngOnInit(): void {
@@ -83,16 +80,7 @@ export class ListFilmComponent {
       .subscribe();
   }
 
-  ngAfterViewInit() {
-    if (this.scrollContainer) {
-      (this.scrollContainer.nativeElement as HTMLDivElement).addEventListener(
-        'scrollend',
-        () => this.onScroll()
-      );
-    }
-  }
-
-  private onScroll() {
+  onScroll = () => {
     let div = this.scrollContainer.nativeElement as HTMLDivElement;
 
     if (
@@ -123,7 +111,7 @@ export class ListFilmComponent {
     this.fetchMovie = true;
     this.textSearch = '';
     this.genreSearch = genreFilm;
-    if (genreFilm !== "") {  
+    if (genreFilm !== "") {
       this.getFilmByFiltres(genreFilm, '');
     }else{
       this.getFilms()

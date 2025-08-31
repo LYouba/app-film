@@ -21,14 +21,13 @@ export class DetailsFilmComponent {
     this.route.params.subscribe({
       next: (params) => {
         this.film$ = this.filmService.getDetailsFilmByID(params['id']).pipe(
-          map(data => { 
+          map(data => {
             // console.log(data.movie);
             return { detailsFilm: data.movie } }),
           catchError(error => of(error))
         );
       },
       error: (err) => {
-        console.log('errer parametre details film');
         // throw new Error(`erreur parametre id details film `);
       },
     })

@@ -5,15 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SubStringPipe implements PipeTransform {
 
-  transform(value: String, separator: String): String {
+  transform(value: String, lengthMax:number): String {
     if(!value)
       value = "Pas de titre";
 
-    if (value.length<20) {
+    if (value.length<lengthMax) {
       return value
     }
-    
-    return value.slice(0, 20).concat('...');
+    return value.slice(0, lengthMax).concat('...');
   }
-
 }

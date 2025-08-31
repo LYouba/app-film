@@ -1,11 +1,11 @@
-<div class="max-lg:w-fit max-lg:m-1 max-lg:p-2 m-4 p-3 bg-white bg-opacity-20 rounded-2xl hover:contrast-125 hover:bg-opacity-40">
-  <a routerLink="/films/{{card.id}}">
-    <img *ngIf="card.imgSrc; else elseBlock" class="max-lg:w-16 max-lg:h-24 w-48 h-22.5 m-auto object-cover" src="{{card.imgSrc}}" alt="Photo de couverture film">
-    <p class="max-lg:hidden max-lg:text-xs text-center">{{card.title | subString:':'}}</p>
-    <p class="max-lg:w-20 max-lg:text-xss text-center w-48">Date de sortie : {{card.anneeProduction}}</p>
+<div class="max-lg:w-fit max-lg:m-1 max-lg:p-1 m-2 p-1 bg-white bg-opacity-5 rounded-2xl hover:contrast-125 hover:bg-opacity-40">
+  <a routerLink="/films/{{card.id}}" class="max-lg:h-24 max-lg:w-16 w-[133.33px] h-22.5 m-auto">
+    <img *ngIf="card.imgSrc; else elseBlock" class=" w-[inherit] h-[inherit] object-cover rounded-2xl" src="{{card.imgSrc}}" alt="Photo de couverture film">
+    <p class="max-lg:hidden max-lg:text-xs text-xs text-center w-[inherit] truncate">{{card.title}}</p>
+    <p class="max-lg:text-xss text-xs break-all text-center">Date sortie <span class="max-lg:block">{{card.anneeProduction}}</span></p>
   </a>
 </div>
 
 <ng-template #elseBlock>
-  <img class="max-lg:w-16 max-lg:h-24 w-48 h-22.5 m-auto" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture film">
+  <img class="w-[inherit] h-[inherit] rounded-2xl" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture film">
 </ng-template>
