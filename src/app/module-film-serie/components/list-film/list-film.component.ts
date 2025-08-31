@@ -19,11 +19,16 @@ import { FilmService } from 'src/app/module-film-serie/services/film.service';
 import { SearchService } from 'src/app/module-film-serie/services/search.service';
 import { TypeGenre } from '../../models/genre.model';
 import { AbstractListElement } from '../AbstractListElement';
+import { ListComponent } from '../../shared/list/list.component';
+import { GenreComponent } from '../genre/genre.component';
+import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
-  selector: 'app-list-film',
-  templateUrl: './list-film.component.html',
-  styleUrls: ['./list-film.component.css'],
+    selector: 'app-list-film',
+    templateUrl: './list-film.component.html',
+    styleUrls: ['./list-film.component.css'],
+    standalone: true,
+    imports: [CardComponent, GenreComponent, ListComponent]
 })
 export class ListFilmComponent extends AbstractListElement{
 

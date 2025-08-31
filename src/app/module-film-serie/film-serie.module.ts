@@ -14,21 +14,19 @@ import { CardComponent } from './shared/card/card.component';
 import { ListComponent } from './shared/list/list.component';
 
 @NgModule({
-  declarations: [
-    ListFilmComponent,
-    ListNouveauFilmComponent,
-    DetailsFilmComponent,
-    ListSerieComponent,
-    DetailsSerieComponent,
-    GenreComponent,
-    TimePipe,
-    SubStringPipe,
-    CardComponent,
-    ListComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        ListFilmComponent,
+        ListNouveauFilmComponent,
+        DetailsFilmComponent,
+        ListSerieComponent,
+        DetailsSerieComponent,
+        GenreComponent,
+        TimePipe,
+        SubStringPipe,
+        CardComponent,
+        ListComponent
+    ]
 })
 export class FilmSerieModule { }

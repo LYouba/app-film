@@ -17,11 +17,16 @@ import {
 } from 'src/app/module-film-serie/models/film.model';
 import { FilmService } from 'src/app/module-film-serie/services/film.service';
 import { TypeGenre } from '../../models/genre.model';
+import { ListComponent } from '../../shared/list/list.component';
+import { GenreComponent } from '../genre/genre.component';
+import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
-  selector: 'app-list-nouveau-film',
-  templateUrl: './list-nouveau-film.component.html',
-  styleUrls: ['./list-nouveau-film.component.css'],
+    selector: 'app-list-nouveau-film',
+    templateUrl: './list-nouveau-film.component.html',
+    styleUrls: ['./list-nouveau-film.component.css'],
+    standalone: true,
+    imports: [CardComponent, GenreComponent, ListComponent]
 })
 export class ListNouveauFilmComponent {
   private static LIMIT_NB_FILM: number = 50;

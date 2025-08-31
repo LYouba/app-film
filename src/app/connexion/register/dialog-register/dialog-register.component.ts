@@ -6,22 +6,26 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatDialog,
-} from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DialogLoginComponent } from '../../login/dialog-login/dialog-login.component';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-dialog-register',
-  templateUrl: './dialog-register.component.html',
-  styleUrls: ['./dialog-register.component.scss'],
+    selector: 'app-dialog-register',
+    templateUrl: './dialog-register.component.html',
+    styleUrls: ['./dialog-register.component.scss'],
+    standalone: true,
+    imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NgIf, MatButtonModule, MatIconModule, MatCheckboxModule]
 })
 export class DialogRegisterComponent {
   hide: boolean = true;

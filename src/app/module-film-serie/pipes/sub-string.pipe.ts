@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'subString'
+    name: 'subString',
+    standalone: true
 })
 export class SubStringPipe implements PipeTransform {
 

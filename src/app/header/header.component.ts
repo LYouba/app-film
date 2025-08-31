@@ -1,19 +1,20 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { MatMenu } from '@angular/material/menu';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { SearchService } from '../module-film-serie/services/search.service';
-import { MatDialog } from '@angular/material/dialog';
 import { DialogLoginComponent } from '../connexion/login/dialog-login/dialog-login.component';
-import {
-  NavigationEnd,
-  Router,
-} from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { DialogRegisterComponent } from '../connexion/register/dialog-register/dialog-register.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: true,
+    imports: [RouterLink, RouterLinkActive, MatIconModule, MatButtonModule, MatMenuModule, MatDialogModule]
 })
 export class HeaderComponent {
   private ngUnsubscribe = new Subject<void>();

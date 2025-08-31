@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
 import { FilmService } from 'src/app/module-film-serie/services/film.service';
+import { TimePipe } from '../../pipes/time.pipe';
+import { NgIf, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-details-film',
-  templateUrl: './details-film.component.html',
-  styleUrls: ['./details-film.component.css']
+    selector: 'app-details-film',
+    templateUrl: './details-film.component.html',
+    styleUrls: ['./details-film.component.css'],
+    standalone: true,
+    imports: [NgIf, NgFor, AsyncPipe, KeyValuePipe, TimePipe]
 })
 export class DetailsFilmComponent {
   film$!: Observable<any>;

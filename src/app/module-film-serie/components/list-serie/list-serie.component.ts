@@ -20,11 +20,16 @@ import { SerieService } from 'src/app/module-film-serie/services/serie.service';
 import { TypeGenre } from '../../models/genre.model';
 import { Errors } from '../../models/film.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ListComponent } from '../../shared/list/list.component';
+import { GenreComponent } from '../genre/genre.component';
+import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
-  selector: 'app-list-serie',
-  templateUrl: './list-serie.component.html',
-  styleUrls: ['./list-serie.component.css'],
+    selector: 'app-list-serie',
+    templateUrl: './list-serie.component.html',
+    styleUrls: ['./list-serie.component.css'],
+    standalone: true,
+    imports: [CardComponent, GenreComponent, ListComponent]
 })
 export class ListSerieComponent {
   static LIMIT_NB_SERIE: number = 50;

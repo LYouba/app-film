@@ -6,17 +6,23 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatError } from '@angular/material/form-field';
+import { FormControl, FormGroup, NgForm, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-dialog-login',
-  templateUrl: './dialog-login.component.html',
-  styleUrls: ['./dialog-login.component.scss'],
+    selector: 'app-dialog-login',
+    templateUrl: './dialog-login.component.html',
+    styleUrls: ['./dialog-login.component.scss'],
+    standalone: true,
+    imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NgIf, MatButtonModule, MatIconModule]
 })
 export class DialogLoginComponent {
   hide :boolean =true;

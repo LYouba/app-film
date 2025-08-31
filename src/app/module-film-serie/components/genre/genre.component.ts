@@ -5,11 +5,14 @@ import { SerieService } from 'src/app/module-film-serie/services/serie.service';
 import { ResponseGenres } from '../../models/film.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TypeGenre } from '../../models/genre.model';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-genre',
-  templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.scss'],
+    selector: 'app-genre',
+    templateUrl: './genre.component.html',
+    styleUrls: ['./genre.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor, AsyncPipe]
 })
 export class GenreComponent {
   selectedGenre!: string;
