@@ -1,6 +1,6 @@
 <ng-container *ngIf="serie$ | async as data; else loding">
   <ng-container *ngIf="data.detailsSerie as serie ; else errors"><!-- -->
-    <div  class="text-amber-50 mt-24">
+    <div  class="text-amber-50 mt-2 overflow-auto max-h-screen">
       <h1 *ngIf="serie.title" class="mx-auto text-center text-4xl p-6">{{ serie.title!=='' ? serie.title : 'Aucun titre à afficher' }}</h1>
       <div class="flex justify-center max-lg:flex-wrap">
         <div class="max-lg:h-60 max-lg:overflow-auto text-right self-center">
@@ -23,8 +23,8 @@
       </div>
       <div class="lg:ml-40">'""  Pas de video  ""'</div>
       </div>
-      <p *ngIf="serie.description" class="max-lg:h-60 max-lg:overflow-auto max-lg:w-3/4 max-lg:mt-5 mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{serie.description}}</span></p>
-      <p *ngIf="serie.tagline" class="max-lg:h-fit max-lg:overflow-auto max-lg:w-3/4 max-lg:mt-5 pt-4 text-center"><span class="font-thin">{{serie.tagline}}</span></p>
+      <p *ngIf="serie.description" class="max-lg:h-60 max-lg:overflow-auto max-lg:h-fit max-lg:w-3/4 max-lg:mt-5 mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{serie.description}}</span></p>
+      <p *ngIf="serie.tagline" class="max-lg:h-60 max-lg:overflow-auto max-lg:w-3/4 max-lg:mt-5 pt-4 mx-auto text-center"><span class="font-thin">{{serie.tagline}}</span></p>
     </div>
   </ng-container>
   <ng-template #errors>

@@ -2,7 +2,7 @@
 on faisant une autre requete sur un autre lien -->
 <ng-container *ngIf="film$ | async as data; else loding">
   <ng-container *ngIf="data.detailsFilm as film; else errors">
-    <div  class="text-amber-50 mt-24">
+    <div  class="text-amber-50 mt-2 overflow-auto max-h-screen">
       <h1 *ngIf="film.title" class="mx-auto text-center text-4xl p-6">{{ film.title!=='' ? film.title : 'Aucun titre à afficher' }}</h1>
       <div class="flex justify-center max-lg:flex-wrap">
         <div class="max-lg:h-60 max-lg:overflow-auto text-right self-center">
@@ -25,8 +25,8 @@ on faisant une autre requete sur un autre lien -->
         </div>
         <div class="lg:ml-40">'""  Pas de video  ""' </div>
       </div>
-      <p *ngIf="film.synopsis" class="max-lg:h-60 max-lg:overflow-auto max-lg:w-3/4 max-lg:mt-5 mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{film.synopsis}}</span></p>
-      <p *ngIf="film.tagline" class="max-lg:h-fit max-lg:overflow-auto max-lg:w-3/4 max-lg:mt-5 pt-4 text-center"><span class="font-thin">{{film.tagline}}</span></p>
+      <p *ngIf="film.synopsis" class="max-lg:h-60 max-lg:overflow-auto max-lg:h-fit max-lg:w-3/4 max-lg:mt-5 mx-auto text-center pt-4 font-bold w-1/2">Synopsis : <span class="font-thin pt-4">{{film.synopsis}}</span></p>
+      <p *ngIf="film.tagline" class="max-lg:h-60 max-lg:overflow-auto max-lg:w-3/4 max-lg:mt-5 pt-4 mx-auto text-center"><span class="font-thin">{{film.tagline}}</span></p>
     </div>
   </ng-container>
   <ng-template #errors>
