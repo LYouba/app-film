@@ -4,6 +4,7 @@ export class Card {
     public title: string,
     public anneeProduction: number,
     public imgSrc: string,
+    public routerLink?: string,
   ) {}
 }
 

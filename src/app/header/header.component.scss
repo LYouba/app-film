@@ -1,7 +1,9 @@
+@import "../../var.css";
 
 .active {
   background-color: #c2185b;
 }
+
 .search-container {
   position: relative;
 }
@@ -25,4 +27,8 @@ a{
   cursor: pointer;
   background-color: #c2185b;
   border-radius: 0 16px;
+}
+
+.header {
+  height: var(--height-header);
 }

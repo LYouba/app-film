@@ -90,7 +90,7 @@ export class Serie implements CardInterface {
   }
 
   toCard(): Card {
-    return new Card(this.id, this.title, this.creation, this.poster);
+    return new Card(this.id, this.title, this.creation, this.poster, `/series/${this.id}`);
   }
 }
 

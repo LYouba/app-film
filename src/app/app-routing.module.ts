@@ -12,7 +12,11 @@ const routes: Routes = [
   // {
   //   path: 'login/:login', component: DialogLoginComponent, pathMatch:'full'
   // },
-  { path: 'nouveautées',title: "nouveautées", component: ListNouveauFilmComponent },
+  { path: 'nouveautées',title: "nouveautées", children: [
+      { path: '', component: ListNouveauFilmComponent },
+      { path: ':id', component: DetailsFilmComponent },
+    ]
+  },
   {
     path: 'films', title: "films", canActivateChild: [AuthGuard], children: [
       { path: '', component: ListFilmComponent },

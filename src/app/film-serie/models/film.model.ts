@@ -56,7 +56,7 @@ export class Movie implements CardInterface {
   }
 
   toCard(): Card {
-    return new Card(this.id, this.title, this.production_year, this.poster);
+    return new Card(this.id, this.title, this.production_year, this.poster, `/films/${this.id}`);
   }
 }
 

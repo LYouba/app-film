@@ -1,0 +1,5 @@
+:host {
+  --height-header: 90px;
+  --height-content-body: calc(100vh - (var(--height-header)  + 20px));
+  --height-content-body-mobile: calc(100vh - (var(--height-header)  + 10px));
+}

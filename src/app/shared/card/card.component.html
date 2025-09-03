@@ -1,6 +1,6 @@
 <div class="max-lg:w-fit max-lg:m-1 max-lg:p-1 m-2 p-1 bg-white bg-opacity-5 rounded-2xl hover:contrast-125 hover:bg-opacity-40">
-  <a routerLink="/films/{{card.id}}" class="max-lg:h-24 max-lg:w-16 w-[133.33px] h-22.5 m-auto">
-    <img *ngIf="card.imgSrc; else elseBlock" class=" w-[inherit] h-[inherit] object-cover rounded-2xl" src="{{card.imgSrc}}" alt="Photo de couverture film">
+  <a routerLink="/{{card.routerLink}}" class="max-lg:h-24 max-lg:w-16 w-[133.33px] h-22.5 m-auto">
+    <img *ngIf="card.imgSrc; else elseBlock" class="max-lg:text-xs w-[inherit] h-[inherit] object-cover rounded-2xl" src="{{card.imgSrc}}" alt="Photo de couverture film">
 
     @if (card.title) {
       <p class="max-lg:hidden max-lg:text-xs text-xs text-center w-[inherit] truncate">{{card.title}}</p>
@@ -13,5 +13,5 @@
 </div>
 
 <ng-template #elseBlock>
-  <img class="w-[inherit] h-[inherit] rounded-2xl" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture film">
+  <img class="w-[inherit] h-[inherit] rounded-2xl max-lg:text-xs" src="https://cdn.pixabay.com/photo/2017/05/13/09/04/question-2309042_960_720.jpg" alt="Photo de couverture film">
 </ng-template>

@@ -1,8 +1,1 @@
-.img-heaight {
-  height: 480px;
-}
-@media not (min-width: 768px) {
-  .img-heaight {
-    height: 120px;
-  }
-}
+
